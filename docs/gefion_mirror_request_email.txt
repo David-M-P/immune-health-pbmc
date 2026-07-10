@@ -9,7 +9,7 @@ Repository:
 PBMC Immune Health
 
 GitHub URL:
-https://github.com/davidmartinpes/immune-health-pbmc
+https://github.com/David-M-P/immune-health-pbmc
 
 The repository contains my analysis code together with vendored copies of the
 TRIPSO source code and its reproducibility repository. They are included as
