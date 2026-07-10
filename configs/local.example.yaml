@@ -1,0 +1,4 @@
+project_root: /REPLACE/WITH/PROJECT/PATH
+data_root: /REPLACE/WITH/DATA/PATH
+results_root: /REPLACE/WITH/RESULTS/PATH
+scratch_root: /REPLACE/WITH/SCRATCH/PATH

@@ -1,0 +1,32 @@
+Subject: Request to mirror public GitHub repository into Gefion GitLab
+
+Hi,
+
+Could you please create a local Gefion GitLab mirror of the following public
+GitHub repository?
+
+Repository:
+PBMC Immune Health
+
+GitHub URL:
+https://github.com/davidmartinpes/immune-health-pbmc
+
+The repository contains my analysis code together with vendored copies of the
+TRIPSO source code and its reproducibility repository. They are included as
+ordinary tracked files rather than Git submodules, so only this single
+repository needs to be mirrored.
+
+Raw data, patient-level data, generated single-cell objects, model outputs,
+credentials, and other sensitive project files are not included.
+
+GitHub will be the source of truth, with the Gefion GitLab repository acting as
+a one-way mirror for running the code on Gefion.
+
+Could you please make the mirrored repository available to my Gefion account
+and send me the internal GitLab clone URL when it is ready?
+
+Gefion username:
+<ADD_GEFION_USERNAME>
+
+Best regards,
+David Martín Pestaña

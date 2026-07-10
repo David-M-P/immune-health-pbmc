@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "immune-health-pbmc"
+version = "0.1.0.dev0"
+description = "Interpretable and transferable immune-health modelling from PBMC single-cell RNA-seq data"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["src"]
