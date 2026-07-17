@@ -1,0 +1,30 @@
+run:
+  name: full_healthy_reference
+  mode: full
+
+datasets:
+  healthy:
+    - "<HEALTHY_DATASET_1>"
+    - "<HEALTHY_DATASET_2>"
+    - "<HEALTHY_DATASET_3>"
+    - "<HEALTHY_DATASET_4>"
+    - "<HEALTHY_DATASET_5>"
+  validation:
+    - "<SOUNDLIFE_DATASET>"
+  query: []
+
+sampling:
+  max_donors_per_dataset: null
+  max_cells_per_donor: null
+
+models:
+  tripso:
+    enabled: true
+    epochs: "<FULL_REFERENCE_TRIPSO_EPOCHS>"
+    seeds:
+      - 1
+      - 2
+      - 3
+
+reports:
+  generate_full_report: true

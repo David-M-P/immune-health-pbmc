@@ -1,0 +1,22 @@
+cluster:
+  name: gefion
+  scheduler: slurm
+  project_account: cu_0071
+  partition_gpu: "<GEFION_GPU_PARTITION>"
+  partition_cpu: "<GEFION_CPU_PARTITION>"
+
+paths:
+  data_root: "<GEFION_DATA_ROOT>"
+  project_root: "<GEFION_PROJECT_ROOT>"
+  scratch_root: "<GEFION_SCRATCH_ROOT>"
+  output_root: "<GEFION_OUTPUT_ROOT>"
+
+environment:
+  activation_command: "<GEFION_ENVIRONMENT_ACTIVATION_COMMAND>"
+  environment_name: immune-health-pbmc
+
+slurm:
+  default_time: "<GEFION_DEFAULT_WALLTIME>"
+  default_memory_gb: "<GEFION_DEFAULT_MEMORY_GB>"
+  default_cpus: "<GEFION_DEFAULT_CPUS>"
+  default_gpus: "<GEFION_DEFAULT_GPUS>"

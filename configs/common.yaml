@@ -1,0 +1,36 @@
+project:
+  name: immune_health_pbmc
+  random_seed: 42
+
+annotation:
+  config: configs/annotation/celltypist_v1.yaml
+  version: lineage_v1_celltypist
+  column: analysis_lineage
+  confidence_column: annotation_confidence
+  allow_unknown: true
+
+lineages:
+  - T_and_NK
+  - B
+  - Plasma
+  - Mono_and_DC
+  - pDC
+  - Platelets
+  - RBC_and_HSPC
+  - Cycling
+  - Doublet_or_ambiguous
+  - Unknown
+
+aggregation:
+  biological_unit: donor
+  min_cells_per_donor_lineage: 30
+  cell_cap_per_donor_lineage: 5000
+
+healthy_reference:
+  age_model: spline
+  condition_on_sex: true
+  use_dataset_balancing: true
+
+validation:
+  soundlife_held_out: true
+  disease_cohorts_held_out: true

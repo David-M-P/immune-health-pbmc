@@ -2,68 +2,101 @@
 
 ## Project goal
 
-This project develops an interpretable and transferable immune-health metric from healthy PBMC single-cell RNA-seq cohorts and evaluates it in disease cohorts.
+This repository supports development of an interpretable, transferable
+immune-health metric from PBMC single-cell RNA-seq data. Healthy cohorts will
+define expected age- and sex-associated immune patterns, SoundLife will test
+longitudinal stability, and immune-challenged cohorts will be scored against the
+frozen healthy reference. Donors, rather than individual cells, are the
+biological replicates.
 
-## Repository structure
+The repository currently contains configuration and validation scaffolding only.
+Scientific analysis is intentionally not implemented yet.
 
-```text
-configs/                 Tracked, machine-neutral configuration examples
-docs/                    Provenance and development documentation
-notebooks/               Project notebooks
-scripts/                 Lightweight command-line utilities
-slurm/au/                 Aarhus University HPC job scripts
-slurm/gefion/             Gefion job scripts
-src/immune_health_pbmc/  Project Python package
-tests/                   Project tests
-tripso_code/              Vendored TRIPSO source and reproducibility code
-```
+## Intended module sequence
 
-## Vendored TRIPSO source code
+The planned pipeline is:
 
-TRIPSO and its reproducibility repository are included directly under `tripso_code/` as ordinary tracked files. No additional GitHub clone or submodule initialization is needed to access them. The vendored source may be modified within this main repository when project work requires it; those changes are then recorded in the main repository history.
+1. prepare and harmonize each dataset;
+2. calculate and report quality-control metrics;
+3. annotate cells and collapse labels to a stable broad-lineage contract;
+4. create lineage-specific objects;
+5. aggregate cells into donor-aware summaries;
+6. model interpretable gene programs;
+7. fit healthy age- and sex-associated trajectories;
+8. compute immune-health components with uncertainty;
+9. validate longitudinal stability in SoundLife;
+10. transfer the frozen reference to immune-challenged cohorts; and
+11. build traceable reports.
 
-The upstream projects remain third-party software governed by their retained licenses. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [docs/TRIPSO_PROVENANCE.md](docs/TRIPSO_PROVENANCE.md).
-
-## Installation
-
-Python 3.10 or newer is required. Dependency installation is intentionally a user-run step:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -e ./tripso_code/tripso
-python -m pip install -e .
-```
-
-## Basic verification
-
-After installation, verify that the vendored TRIPSO package is importable:
-
-```bash
-python scripts/check_tripso_import.py
-```
-
-## Computing environments
-
-GitHub is the canonical source of truth. Local development and the Aarhus University HPC use the GitHub repository directly. Gefion uses an internal GitLab mirror of the GitHub repository and is normally treated as an execution environment.
+CellTypist is the initial annotation implementation. Downstream stages will use
+the standard annotation fields rather than CellTypist-specific output names, so
+the annotation method can be upgraded without rewriting the analysis.
 
 ## Configuration
 
-The YAML files in `configs/` are examples only. Copy the appropriate example to an untracked local configuration and replace its placeholders. Machine-specific paths belong in local configuration files, not committed source code.
+Runtime configuration has three layers:
 
-## Data policy
+```text
+configs/common.yaml
+  + configs/clusters/<cluster>.yaml
+  + configs/analyses/<analysis>.yaml
+```
 
-Raw data and patient-level information must never be committed. Large processed single-cell objects, generated model outputs, checkpoints, and other derived assets should normally remain outside Git. Any required external assets must be documented without exposing credentials or sensitive locations.
+Gefion and GenomeDK share the scientific and analysis configuration. They differ
+only in infrastructure settings such as data roots, output roots, Slurm account,
+partitions, and environment activation. Gefion's known project account is
+`cu_0071`; all unknown cluster values remain visibly marked with angle-bracket
+placeholders. GenomeDK values are independent placeholders and must be filled in
+before submission.
 
-## Development workflow
+Dataset-specific metadata belongs in `configs/datasets/`. The included
+`example_dataset.yaml` is a template and does not identify a real cohort.
 
-Begin work by pulling the latest canonical branch, then use a short-lived feature or fix branch for meaningful changes. The laptop and AU HPC push to GitHub; Gefion receives the one-way mirror. See [docs/DEVELOPMENT_WORKFLOW.md](docs/DEVELOPMENT_WORKFLOW.md).
+## Development-mode example
 
-## Third-party attribution
+Install the lightweight project dependencies into an active Python 3.10+
+environment:
 
-TRIPSO and the TRIPSO reproducibility repository are third-party projects. Their original LICENSE files remain in their vendored directories, and exact imported revisions are recorded in the provenance documentation.
+```bash
+python -m pip install -e ".[dev]"
+```
 
-## Current status
+Then resolve and validate a development configuration:
 
-The repository currently provides the initial project structure, environment-neutral configuration examples, workflow documentation, and self-contained vendored TRIPSO working trees. Scientific analyses and project-specific implementations will be added as research work proceeds.
+```bash
+python scripts/00_validate_config.py \
+  --common-config configs/common.yaml \
+  --cluster-config configs/clusters/gefion.yaml \
+  --analysis-config configs/analyses/development.yaml \
+  --run-id 20260710_development_celltypist
+```
+
+This writes `runs/<run-id>/resolved_config.yaml`. Placeholder warnings are
+expected in the initial scaffold; replace those values before running data or
+Slurm stages.
+
+## Repository layout
+
+```text
+configs/             Scientific, analysis, annotation, dataset, and HPC settings
+scripts/             Explicit command-line entry points
+src/immune_health/   Stable reusable analysis logic
+workflows/           Thin execution wrappers (to be added when stages exist)
+metadata/            Dataset and donor manifests (not populated yet)
+annotations/         Versioned annotation mappings (not populated yet)
+tests/               Small safeguards for configuration and contracts
+runs/                Run-specific resolved configuration and future outputs
+tripso_code/          Vendored third-party TRIPSO source and reproducibility code
+```
+
+Raw or patient-level data must not be committed. Generated results, model
+outputs, and large single-cell objects should remain outside Git or under ignored
+run directories. See [AGENTS.md](AGENTS.md) for the full biological and
+engineering guidance.
+
+## Vendored TRIPSO source
+
+TRIPSO and its reproducibility repository are vendored under `tripso_code/`.
+Their licenses and imported revisions are documented in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and
+[docs/TRIPSO_PROVENANCE.md](docs/TRIPSO_PROVENANCE.md).

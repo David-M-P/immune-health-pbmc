@@ -1,0 +1,20 @@
+dataset:
+  id: "<DATASET_ID>"
+  study_id: "<STUDY_ID>"
+  role: "<healthy_reference|longitudinal_validation|query>"
+  input_path: "<DATASET_INPUT_H5AD>"
+  input_format: h5ad
+
+metadata_columns:
+  cell_id: "<CELL_ID_COLUMN>"
+  library_id: "<LIBRARY_ID_COLUMN>"
+  sample_id: "<SAMPLE_ID_COLUMN>"
+  donor_id: "<DONOR_ID_COLUMN>"
+  age: "<AGE_COLUMN>"
+  sex: "<SEX_COLUMN>"
+  healthy_status: "<HEALTHY_STATUS_COLUMN>"
+
+counts:
+  source: "<COUNTS_LAYER_OR_X>"
+
+notes: "Replace every angle-bracket placeholder before using this dataset."

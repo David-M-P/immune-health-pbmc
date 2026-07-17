@@ -1,0 +1,22 @@
+cluster:
+  name: genomedk
+  scheduler: slurm
+  project_account: "<GENOMEDK_PROJECT_ACCOUNT>"
+  partition_gpu: "<GENOMEDK_GPU_PARTITION>"
+  partition_cpu: "<GENOMEDK_CPU_PARTITION>"
+
+paths:
+  data_root: "<GENOMEDK_DATA_ROOT>"
+  project_root: "<GENOMEDK_PROJECT_ROOT>"
+  scratch_root: "<GENOMEDK_SCRATCH_ROOT>"
+  output_root: "<GENOMEDK_OUTPUT_ROOT>"
+
+environment:
+  activation_command: "<GENOMEDK_ENVIRONMENT_ACTIVATION_COMMAND>"
+  environment_name: immune-health-pbmc
+
+slurm:
+  default_time: "<GENOMEDK_DEFAULT_WALLTIME>"
+  default_memory_gb: "<GENOMEDK_DEFAULT_MEMORY_GB>"
+  default_cpus: "<GENOMEDK_DEFAULT_CPUS>"
+  default_gpus: "<GENOMEDK_DEFAULT_GPUS>"

@@ -1,0 +1,24 @@
+run:
+  name: development_celltypist
+  mode: development
+
+datasets:
+  healthy:
+    - "<DEVELOPMENT_HEALTHY_DATASET_1>"
+    - "<DEVELOPMENT_HEALTHY_DATASET_2>"
+  validation: []
+  query: []
+
+sampling:
+  max_donors_per_dataset: 5
+  max_cells_per_donor: 2000
+
+models:
+  tripso:
+    enabled: true
+    epochs: 5
+    seeds:
+      - 1
+
+reports:
+  generate_full_report: false

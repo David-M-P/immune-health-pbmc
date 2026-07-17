@@ -1,0 +1,28 @@
+annotation:
+  method: celltypist
+  version: lineage_v1_celltypist
+  model: "<CELLTYPIST_MODEL_NAME_OR_PATH>"
+  majority_voting: true
+  confidence_threshold: "<CELLTYPIST_CONFIDENCE_THRESHOLD>"
+  allow_unknown: true
+  lineage_mapping: annotations/lineage_v1_celltypist.tsv
+
+output_columns:
+  - cell_id
+  - analysis_lineage
+  - fine_cell_type
+  - annotation_method
+  - annotation_version
+  - confidence
+  - second_best_label
+  - decision_margin
+  - annotation_status
+
+allowed_statuses:
+  - high_confidence
+  - moderate_confidence
+  - low_confidence
+  - mixed
+  - doublet
+  - low_quality
+  - unknown
