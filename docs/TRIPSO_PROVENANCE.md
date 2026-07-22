@@ -15,3 +15,15 @@ Both working trees were imported on `2026-07-10`. Their original Git metadata is
 TRIPSO and the TRIPSO reproducibility repository are third-party projects. Vendoring their source does not transfer ownership, and their upstream licenses continue to apply. The original LICENSE files remain inside their vendored directories.
 
 The nested upstream Git histories are not embedded in the parent repository. Future modifications made in this project will be recorded in the main repository history. The upstream origin URLs and exact imported commits are preserved here for reproducibility.
+
+## Project-local runtime adapters
+
+The files under `tripso_code/tripso` remain unchanged. Production training calls
+the vendored `tripso.train` function, but the project wrapper temporarily swaps
+its W&B-only helper globals for a deterministic save identifier, no-op W&B
+initializer, and PyTorch Lightning `CSVLogger`. It also skips the vendor's
+post-training `wandb.Api` history readback, which cannot work for an offline run.
+This does not replace the vendor datamodule, models, Lightning modules, losses,
+callbacks, or `Trainer.fit`. The exact adapter plan and resulting local metrics
+hash are recorded in `tripso_training_invocation.json`,
+`tripso_training_result.json`, and `model_manifest.json`.

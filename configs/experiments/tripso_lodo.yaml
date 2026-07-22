@@ -1,0 +1,133 @@
+schema_version: immune-health-tripso-experiment/v1
+experiment_id: tripso_lodo_healthy_reference
+
+# Exact healthy dataset names observed in reports/data_audit/dataset_summary.tsv.
+healthy_datasets:
+  - aidav2
+  - immuneindonesia
+  - immunobiologyaging
+  - onek1k
+  - terekhova
+
+# Primary broad-lineage directory/display names observed in the merged H5AD audit.
+lineages:
+  - B cells
+  - NK_ILC
+  - Monocytes
+  - CD4_like
+  - CD8_like
+
+model_selection:
+  role: validation
+  inner_validation_fold: 0
+  inner_fold_column: inner_fold
+  outer_query_evaluation_only: true
+  outer_query_used_for_selection: false
+
+# Each feature set contains the fold-local HVGs plus every gene retained in the
+# fold-local gene-program library. Feature preparation keeps every eligible cell;
+# this dimension changes genes, not rows.
+hvg_sizes: [3000, 9000]
+
+samplers:
+  native_all_cells:
+    primary_screen: true
+    backend: vendor
+    project_sampler_enabled: false
+    project_sampler_mode: null
+    alpha: null
+    fine_type_lambda: null
+  donor_uniform_observed:
+    primary_screen: true
+    backend: hierarchical
+    project_sampler_enabled: true
+    project_sampler_mode: observed_proportions
+    alpha: 1.0
+    fine_type_lambda: 1.0
+  hybrid:
+    primary_screen: true
+    backend: hierarchical
+    project_sampler_enabled: true
+    project_sampler_mode: hybrid
+    alpha: 0.5
+    fine_type_lambda: 0.7
+  fully_balanced:
+    # Optional diagnostic, deliberately excluded from the primary Stage-1 screen.
+    primary_screen: false
+    backend: hierarchical
+    project_sampler_enabled: true
+    project_sampler_mode: fully_balanced
+    alpha: 0.5
+    fine_type_lambda: 0.0
+
+stages:
+  stage1:
+    design: lodo
+    configuration_selection: all_primary
+    seed_offsets: [0]
+  stage2:
+    design: lodo
+    # Replace both sampler/HVG pairs only after Stage-1 INNER donor-validation
+    # review. Outer held-out cohort results are evaluation-only and must never be
+    # used to populate these fields.
+    # Stage-1 already trained offset 0; Stage 2 adds offsets 1 and 2 only.
+    extends_stage: stage1
+    reused_seed_offsets: [0]
+    configuration_selection_by_lineage:
+      B cells:
+        - {sampler: "<SELECT_CONFIG_1_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_1_AFTER_STAGE1>"}
+        - {sampler: "<SELECT_CONFIG_2_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_2_AFTER_STAGE1>"}
+      NK_ILC:
+        - {sampler: "<SELECT_CONFIG_1_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_1_AFTER_STAGE1>"}
+        - {sampler: "<SELECT_CONFIG_2_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_2_AFTER_STAGE1>"}
+      Monocytes:
+        - {sampler: "<SELECT_CONFIG_1_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_1_AFTER_STAGE1>"}
+        - {sampler: "<SELECT_CONFIG_2_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_2_AFTER_STAGE1>"}
+      CD4_like:
+        - {sampler: "<SELECT_CONFIG_1_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_1_AFTER_STAGE1>"}
+        - {sampler: "<SELECT_CONFIG_2_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_2_AFTER_STAGE1>"}
+      CD8_like:
+        - {sampler: "<SELECT_CONFIG_1_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_1_AFTER_STAGE1>"}
+        - {sampler: "<SELECT_CONFIG_2_AFTER_STAGE1>", hvg_size: "<SELECT_HVG_2_AFTER_STAGE1>"}
+    seed_offsets: [1, 2]
+  stage3:
+    design: final_all_healthy
+    # Stage 3 uses all five datasets as reference data, with no held-out fold.
+    # Populate its winner from the nested inner-donor selection audit, never from
+    # outer LODO query performance.
+    configuration_selection_by_lineage:
+      B cells:
+        - {sampler: "<SELECT_AFTER_STAGE2>", hvg_size: "<SELECT_HVG_AFTER_STAGE2>"}
+      NK_ILC:
+        - {sampler: "<SELECT_AFTER_STAGE2>", hvg_size: "<SELECT_HVG_AFTER_STAGE2>"}
+      Monocytes:
+        - {sampler: "<SELECT_AFTER_STAGE2>", hvg_size: "<SELECT_HVG_AFTER_STAGE2>"}
+      CD4_like:
+        - {sampler: "<SELECT_AFTER_STAGE2>", hvg_size: "<SELECT_HVG_AFTER_STAGE2>"}
+      CD8_like:
+        - {sampler: "<SELECT_AFTER_STAGE2>", hvg_size: "<SELECT_HVG_AFTER_STAGE2>"}
+    seed_offsets: [0, 1, 2, 3, 4]
+
+paths:
+  # Environment variables are expanded only by the array runner on a compute node.
+  output_template: "${OUTPUT_ROOT}/tripso/{stage}/{lineage_slug}/{fold_slug}/{configuration_slug}/seed_{seed}"
+  # Split tables are versioned with the checkout; large tokenized/model outputs
+  # live under OUTPUT_ROOT.
+  fold_manifest_template: "${PROJECT_ROOT}/splits/lodo_{heldout_dataset}.tsv"
+  fold_input_template: "${OUTPUT_ROOT}/tripso_inputs/{lineage_slug}/lodo_{heldout_dataset}/{hvg_slug}/fold_input.json"
+  final_input_template: "${OUTPUT_ROOT}/tripso_inputs/{lineage_slug}/all_healthy/{hvg_slug}/fold_input.json"
+  environment_report: "${OUTPUT_ROOT}/validation/tripso_environment.json"
+
+# This command is deliberately expressed as argv, never a shell string. The central
+# CLI owns scientific execution; the SLURM runner owns restart/provenance mechanics.
+worker_command:
+  - python
+  - -m
+  - immune_health.cli
+  - train-tripso
+  - --job-spec
+  - "{job_spec_path}"
+  - --parameters-json
+  - configs/experiments/tripso_base_primary.parameters.json
+  - --seed
+  - "{seed}"

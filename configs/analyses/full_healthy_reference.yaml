@@ -4,27 +4,33 @@ run:
 
 datasets:
   healthy:
-    - "<HEALTHY_DATASET_1>"
-    - "<HEALTHY_DATASET_2>"
-    - "<HEALTHY_DATASET_3>"
-    - "<HEALTHY_DATASET_4>"
-    - "<HEALTHY_DATASET_5>"
+    - aidav2
+    - immuneindonesia
+    - immunobiologyaging
+    - onek1k
+    - terekhova
   validation:
-    - "<SOUNDLIFE_DATASET>"
+    - soundlife
   query: []
 
 sampling:
   max_donors_per_dataset: null
   max_cells_per_donor: null
+  sampler_modes: [native_all_cells, donor_uniform_observed, hybrid]
+  optional_sampler_modes: [fully_balanced]
 
 models:
   tripso:
     enabled: true
-    epochs: "<FULL_REFERENCE_TRIPSO_EPOCHS>"
+    primary_model: Base
+    initialization: geneformer_static_hybrid
+    epochs: 20
     seeds:
-      - 1
-      - 2
-      - 3
+      - 42
+      - 43
+      - 44
+    full_geneformer: gated_sensitivity
+    sequential_global: gated_sensitivity
 
 reports:
   generate_full_report: true

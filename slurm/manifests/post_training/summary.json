@@ -1,0 +1,26 @@
+{
+  "counts": {
+    "bind_query": 0,
+    "bind_reference": 150,
+    "bind_validation": 150,
+    "project_query": 0,
+    "project_reference": 150,
+    "project_validation": 150
+  },
+  "default_model_selection_role": "validation",
+  "gp_projection_policy": "fold_bound_training_candidates",
+  "maximum_projected_bytes": 268435456000,
+  "outer_query_allowlist": null,
+  "outer_query_evaluation_enabled": false,
+  "outer_query_selected_job_count": 0,
+  "oversized_projection_override": false,
+  "per_gp_jobs_generated": false,
+  "runnable_training_jobs": 150,
+  "schema_version": "immune-health-post-training-summary/v1",
+  "submitted": false,
+  "training_manifests": {
+    "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/slurm/manifests/stage1.jsonl": "e8c49e980c1e630dfafc0e0fd1575b921366549cb118b824cc92935eed5f0f79",
+    "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/slurm/manifests/stage2.jsonl": "e2d27fe691bb1d953e78c90542945fd5b855d389ed09b3b25d8d20a67913ddc0",
+    "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/slurm/manifests/stage3.jsonl": "d41e56948d60c58f32b250d1562acca90186ed349aa627b96390d0bcf8eaedb3"
+  }
+}

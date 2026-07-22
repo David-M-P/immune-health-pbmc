@@ -1,0 +1,444 @@
+{
+  "checks": {
+    "dependencies": {
+      "passed": true,
+      "results": [
+        {
+          "distribution": "anndata",
+          "installed_version": "0.10.9",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "anndata==0.10.9"
+        },
+        {
+          "distribution": "captum",
+          "installed_version": "0.7.0",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "captum==0.7.0"
+        },
+        {
+          "distribution": "datasets",
+          "installed_version": "3.0.1",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "datasets==3.0.1"
+        },
+        {
+          "distribution": "einops",
+          "installed_version": "0.8.1",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "einops==0.8.1"
+        },
+        {
+          "distribution": "h5py",
+          "installed_version": "3.13.0",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "h5py==3.13.0"
+        },
+        {
+          "distribution": "ipython",
+          "installed_version": "8.21.0",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "ipython==8.21.0"
+        },
+        {
+          "distribution": "jax",
+          "installed_version": "0.6.1",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "jax==0.6.1"
+        },
+        {
+          "distribution": "joblib",
+          "installed_version": "1.4.2",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "joblib==1.4.2"
+        },
+        {
+          "distribution": "matplotlib",
+          "installed_version": "3.10.3",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "matplotlib==3.10.3"
+        },
+        {
+          "distribution": "numpy",
+          "installed_version": "1.25.0",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "numpy==1.25.0"
+        },
+        {
+          "distribution": "ott",
+          "installed_version": "0.1.15",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "ott==0.1.15"
+        },
+        {
+          "distribution": "ott-jax",
+          "installed_version": "0.5.0",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "ott-jax==0.5.0"
+        },
+        {
+          "distribution": "packaging",
+          "installed_version": "25.0",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "packaging==25.0"
+        },
+        {
+          "distribution": "pandas",
+          "installed_version": "2.0.3",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "pandas==2.0.3"
+        },
+        {
+          "distribution": "peft",
+          "installed_version": "0.15.2",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "peft==0.15.2"
+        },
+        {
+          "distribution": "phate",
+          "installed_version": "1.0.11",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "phate==1.0.11"
+        },
+        {
+          "distribution": "pot",
+          "installed_version": "0.9.5",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "pot==0.9.5"
+        },
+        {
+          "distribution": "pytorch-lightning",
+          "installed_version": "2.4.0",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "pytorch_lightning==2.4.0"
+        },
+        {
+          "distribution": "requests",
+          "installed_version": "2.32.3",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "Requests==2.32.3"
+        },
+        {
+          "distribution": "scanpy",
+          "installed_version": "1.10.3",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "scanpy==1.10.3"
+        },
+        {
+          "distribution": "scikit-learn",
+          "installed_version": "1.6.1",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "scikit_learn==1.6.1"
+        },
+        {
+          "distribution": "scipy",
+          "installed_version": "1.15.3",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "scipy==1.15.3"
+        },
+        {
+          "distribution": "scprep",
+          "installed_version": "1.2.3",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "scprep==1.2.3"
+        },
+        {
+          "distribution": "seaborn",
+          "installed_version": "0.13.2",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "seaborn==0.13.2"
+        },
+        {
+          "distribution": "setuptools",
+          "installed_version": "75.8.2",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "setuptools==75.8.2"
+        },
+        {
+          "distribution": "statsmodels",
+          "installed_version": "0.14.4",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "statsmodels==0.14.4"
+        },
+        {
+          "distribution": "tqdm",
+          "installed_version": "4.67.1",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "tqdm==4.67.1"
+        },
+        {
+          "distribution": "transformers",
+          "installed_version": "4.45.1",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "transformers==4.45.1"
+        },
+        {
+          "distribution": "triton",
+          "installed_version": "3.0.0",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "triton==3.0.0"
+        },
+        {
+          "distribution": "universal-pathlib",
+          "installed_version": "0.2.6",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "universal-pathlib==0.2.6"
+        },
+        {
+          "distribution": "wandb",
+          "installed_version": "0.19.11",
+          "pin_matches": true,
+          "present": true,
+          "requirement": "wandb==0.19.11"
+        },
+        {
+          "distribution": "torch",
+          "installed_version": "2.4.1",
+          "pin_matches": null,
+          "present": true,
+          "requirement": "torch (imported by TRIPSO; vendor pin commented out)"
+        },
+        {
+          "distribution": "torchmetrics",
+          "installed_version": "1.7.1",
+          "pin_matches": null,
+          "present": true,
+          "requirement": "torchmetrics (imported by TRIPSO; vendor pin commented out)"
+        },
+        {
+          "distribution": "torchvision",
+          "installed_version": "0.19.1",
+          "pin_matches": null,
+          "present": true,
+          "requirement": "torchvision (imported by TRIPSO; vendor pin commented out)"
+        }
+      ]
+    },
+    "full_geneformer": {
+      "config": {
+        "hidden_size": 512,
+        "intermediate_size": 1024,
+        "max_position_embeddings": 4096,
+        "num_attention_heads": 8,
+        "num_hidden_layers": 12,
+        "vocab_size": 20275
+      },
+      "hashes": {
+        "config.json": "f56780389d8c89c1b6c4084e2e6ee1f736558e4b3bb8ce7473159e83465de401",
+        "model.safetensors": "4365ba23e393fcfa0e65a94ac64a0983cd788bd23a8d4914f4ab66f85cfe043c"
+      },
+      "hashes_pinned": true,
+      "model_directory": "/faststorage/project/immunehealth/Projects/david/external_assets/Geneformer/gf-12L-95M-i4096",
+      "model_name": "gf-12L-95M-i4096",
+      "passed": true,
+      "requested": true,
+      "root": "/faststorage/project/immunehealth/Projects/david/external_assets/Geneformer",
+      "source_revision": "94d98d1774fc21920d2f01dbd23bc22d232a6ec2",
+      "static_embedding_alignment": {
+        "checked": true,
+        "exact_tensor_equality": true,
+        "full_dtype": "torch.float32",
+        "full_shape": [
+          20275,
+          512
+        ],
+        "passed": true,
+        "static_dtype": "torch.float32",
+        "static_embedding_sha256": "637efa884d4007bbec93b7d46f19ecc65c46ddcfe71815a910997b3942e1c4c3",
+        "static_shape": [
+          20275,
+          512
+        ]
+      },
+      "weights_file": "/faststorage/project/immunehealth/Projects/david/external_assets/Geneformer/gf-12L-95M-i4096/model.safetensors"
+    },
+    "linux": {
+      "observed": "Linux",
+      "passed": true,
+      "required": "Linux"
+    },
+    "python_3_10": {
+      "observed": "3.10.14",
+      "passed": true,
+      "required": "3.10.x"
+    },
+    "smoke": {
+      "command": [
+        ".conda_isolated/immune-health-tripso/bin/python",
+        "scripts/run_real_tripso_smoke.py",
+        "--output-dir",
+        "/tmp/immune-health-real-smoke-validator-20260721"
+      ],
+      "mode": "real-command",
+      "output": "\nSaving the dataset (0/1 shards):   0%|          | 0/10 [00:00<?, ? examples/s]\nSaving the dataset (1/1 shards): 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 10/10 [00:00<00:00, 2022.33 examples/s]\nSaving the dataset (1/1 shards): 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 10/10 [00:00<00:00, 1963.63 examples/s]\nSeed set to 42\n/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Models/gp_model.py:177: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.\n  emb = torch.load(emb_path)\n/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Datamodules/datamodule.py:273: UserWarning: Setting pad token ID to 0.Please ensure this matches your tokenization.\n  warnings.warn(\n/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/.conda_isolated/immune-health-tripso/lib/python3.10/site-packages/lightning_fabric/plugins/environments/slurm.py:204: The `srun` command is available on your system but is not used. HINT: If your intention is to run Lightning on SLURM, prepend your python command with `srun` like so: srun python scripts/run_real_tripso_smoke.py --output-dir /tmp/i ...\nGPU available: False, used: False\nTPU available: False, using: 0 TPU cores\nHPU available: False, using: 0 HPUs\n`Trainer(limit_train_batches=1)` was configured so 1 batch per epoch will be used.\n/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/.conda_isolated/immune-health-tripso/lib/python3.10/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:424: The 'train_dataloader' does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` to `num_workers=15` in the `DataLoader` to improve performance.\n/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/.conda_isolated/immune-health-tripso/lib/python3.10/site-packages/pytorch_lightning/core/module.py:516: You called `self.log('train/gene_masking_loss', ..., logger=True)` but have no logger configured. You can enable one by doing `Trainer(logger=ALogger(...))`\n/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/.conda_isolated/immune-health-tripso/lib/python3.10/site-packages/pytorch_lightning/utilities/data.py:78: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 2. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.\n/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/.conda_isolated/immune-health-tripso/lib/python3.10/site-packages/pytorch_lightning/core/module.py:516: You called `self.log('train/SMOKE_GP_MGM_loss', ..., logger=True)` but have no logger configured. You can enable one by doing `Trainer(logger=ALogger(...))`\n/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/.conda_isolated/immune-health-tripso/lib/python3.10/site-packages/pytorch_lightning/core/module.py:516: You called `self.log('train/loss', ..., logger=True)` but have no logger configured. You can enable one by doing `Trainer(logger=ALogger(...))`\n`Trainer.fit` stopped: `max_epochs=1` reached.\nNumber of genes in GP SMOKE_GP 8\nTraining on 8 samples\nUsing ReduceLROnPlateau scheduler\n{\n  \"checkpoint\": {\n    \"path\": \"/tmp/immune-health-real-smoke-validator-20260721/checkpoints/last.ckpt\",\n    \"sha256\": \"a897c82ee72e92e31bf9e06220ba076fd8349321261929a5e002749d64134a39\",\n    \"size_bytes\": 60690907,\n    \"state_dict_entries\": 41\n  },\n  \"data\": {\n    \"genes\": [\n      \"ENSG00000000003\",\n      \"ENSG00000000005\",\n      \"ENSG00000000419\",\n      \"ENSG00000000457\",\n      \"ENSG00000000460\",\n      \"ENSG00000000938\",\n      \"ENSG00000000971\",\n      \"ENSG00000001036\",\n      \"ENSG00000001084\",\n      \"ENSG00000001167\",\n      \"ENSG00000001460\",\n      \"ENSG00000001461\"\n    ],\n    \"gp_library_path\": \"/tmp/immune-health-real-smoke-validator-20260721/tiny_gp_library.csv\",\n    \"gp_size\": 8,\n    \"n_cells\": 10,\n    \"sequence_length_including_cls\": 13,\n    \"tokenized_dataset_path\": \"/tmp/immune-health-real-smoke-validator-20260721/tokenized.dataset\",\n    \"tokens\": [\n      4,\n      5,\n      6,\n      7,\n      8,\n      9,\n      10,\n      11,\n      12,\n      13,\n      14,\n      15\n    ]\n  },\n  \"environment\": {\n    \"accelerator\": \"cpu\",\n    \"cuda_available\": false,\n    \"cuda_device_count\": 0,\n    \"python\": \"3.10.14 | packaged by conda-forge | (main, Mar 20 2024, 12:45:18) [GCC 12.3.0]\",\n    \"pytorch_lightning\": \"2.4.0\",\n    \"torch\": \"2.4.1\"\n  },\n  \"model\": {\n    \"bert_config\": {\n      \"hidden_size\": 512,\n      \"max_seq_len\": 12,\n      \"mlm_masking_prob\": 1.0,\n      \"num_attention_heads\": 8,\n      \"num_hidden_layers\": 1,\n      \"tokenization_input_size\": 4096,\n      \"tokenization_vocab_size\": 20275,\n      \"torch_dtype\": \"float32\",\n      \"use_flash\": false,\n      \"use_l2_norm\": false,\n      \"use_pos_emb\": \"sin_cos\"\n    },\n    \"calc_gene_loss\": true,\n    \"calc_gp_loss\": true,\n    \"embedding_init\": \"geneformer-static\",\n    \"fm_encoder_pkg\": \"from_scratch\",\n    \"gene_identifier_format\": \"ensembl\",\n    \"hidden_size\": 512,\n    \"model_type\": \"Base\",\n    \"static_embedding_path\": \"/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Utils/gf-12L-95M-i4096_word_embeddings_may2025.pt\",\n    \"static_embedding_sha256\": \"637efa884d4007bbec93b7d46f19ecc65c46ddcfe71815a910997b3942e1c4c3\"\n  },\n  \"passed\": true,\n  \"report_path\": \"/tmp/immune-health-real-smoke-validator-20260721/smoke_report.json\",\n  \"run_type\": \"real_vendored_tripso_base_training_smoke\",\n  \"scope\": \"One real CPU/CUDA forward, backward, optimizer step, and checkpoint; not a convergence, biological-validity, dynamic-sampler, or full-data test\",\n  \"synthetic_data\": true,\n  \"training\": {\n    \"batch_size\": 2,\n    \"elapsed_seconds\": 0.2542028995230794,\n    \"epochs\": 1,\n    \"gene_masking_loss\": 2.5981035232543945,\n    \"gp_masking_loss\": 2.1211178302764893,\n    \"limit_train_batches\": 1,\n    \"monitored_gp_decoder_maximum_absolute_change\": 0.00010000169277191162,\n    \"optimizer_steps\": 1,\n    \"train_loss\": 4.719221115112305\n  },\n  \"vendor\": {\n    \"module_path\": \"/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/__init__.py\",\n    \"token_dictionary_path\": \"/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Utils/geneformer_token_dictionary_may2025.pkl\",\n    \"token_dictionary_sha256\": \"67c445f4385127adfc48dcc072320cd65d6822829bf27dd38070e6e787bc597f\",\n    \"vendor_root_requested\": \"/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso\"\n  }\n}\n",
+      "real_tripso_training_smoke_passed": true,
+      "returncode": 0
+    },
+    "tripso_import_and_api": {
+      "error": null,
+      "full_geneformer_forward_adapter_required": true,
+      "full_geneformer_forward_parameters": [
+        "input_dataset",
+        "masking",
+        "self"
+      ],
+      "geneformer_root_adapter_required": true,
+      "gp_eval_parameters": [
+        "batch_size",
+        "cond_to_shift",
+        "dataset_path",
+        "gene_format",
+        "gp_inputs",
+        "gpdb_path",
+        "gpmean_fm_encoder_name",
+        "gpmean_fm_encoder_pkg",
+        "hparam_save",
+        "model_type",
+        "output_dir",
+        "path_to_trained_model",
+        "return_classification_report",
+        "seed",
+        "tissue"
+      ],
+      "module_path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/__init__.py",
+      "passed": true,
+      "query_adapter_private_surface": "gpEval._init_trainer",
+      "train_parameters": [
+        "accumulate_grad_batches",
+        "adata_path",
+        "all_genes",
+        "attn_dropout",
+        "batch_size",
+        "bert_config",
+        "calc_gene_loss",
+        "calc_gp_loss",
+        "classification_labels",
+        "data_seed",
+        "dataset_path",
+        "fm_encoder_name",
+        "fm_encoder_pkg",
+        "frac_for_training",
+        "gene_format",
+        "global_attn_dropout",
+        "global_attn_heads",
+        "global_loss",
+        "global_masking_rate",
+        "global_n_blocks",
+        "global_pos_emb",
+        "global_training",
+        "gp_inputs",
+        "gp_latent_size",
+        "gp_to_learn",
+        "gpdb_path",
+        "init_sparsity",
+        "learn_new_gp",
+        "limit_train_batches",
+        "limit_val_batches",
+        "lora_config_args",
+        "lr",
+        "lr_scheduler",
+        "mgm",
+        "model_type",
+        "n_blocks",
+        "n_epochs",
+        "n_heads",
+        "num_nodes",
+        "output_dir",
+        "path_to_base_model",
+        "peft_config_path",
+        "prbm_path",
+        "precision",
+        "reconstruction_loss",
+        "resume_training",
+        "sample_by",
+        "sampler",
+        "seed",
+        "strategy",
+        "supervised_labels",
+        "supervised_rem_var",
+        "tissue",
+        "use_flash",
+        "use_gene_embeddings",
+        "use_l2_norm",
+        "use_pos_emb",
+        "val_check_interval",
+        "vocab_gene_names",
+        "warmup",
+        "weight_decay"
+      ],
+      "vendor_geneformer_root": "/nfs/team361/mm58/Geneformer"
+    },
+    "vendor_assets": {
+      "passed": true,
+      "results": [
+        {
+          "path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Utils/geneformer_token_dictionary_may2025.pkl",
+          "present_nonempty": true,
+          "relative_path": "tripso/Utils/geneformer_token_dictionary_may2025.pkl",
+          "sha256": "67c445f4385127adfc48dcc072320cd65d6822829bf27dd38070e6e787bc597f",
+          "size_bytes": 425590
+        },
+        {
+          "path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Utils/geneformer_gene_median_file_may2025.pkl",
+          "present_nonempty": true,
+          "relative_path": "tripso/Utils/geneformer_gene_median_file_may2025.pkl",
+          "sha256": "a51c53f6a771d64508dfaf61529df70e394c53bd20856926117ae5d641a24bf5",
+          "size_bytes": 1512661
+        },
+        {
+          "path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Utils/geneformer_ensembl_mapping_file_may2025.pkl",
+          "present_nonempty": true,
+          "relative_path": "tripso/Utils/geneformer_ensembl_mapping_file_may2025.pkl",
+          "sha256": "0819bcbd869cfa14279449b037eb9ed1d09a91310e77bd1a19d927465030e95c",
+          "size_bytes": 3957652
+        },
+        {
+          "path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Utils/geneformer_ensembl_dictionary_may2025.pkl",
+          "present_nonempty": true,
+          "relative_path": "tripso/Utils/geneformer_ensembl_dictionary_may2025.pkl",
+          "sha256": "8b0fd0521406ed18b2e341ef0acb5f53aa1a62457a07ca5840e1c142f46dd326",
+          "size_bytes": 2038812
+        },
+        {
+          "path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Utils/gf-12L-95M-i4096_word_embeddings_may2025.pt",
+          "present_nonempty": true,
+          "relative_path": "tripso/Utils/gf-12L-95M-i4096_word_embeddings_may2025.pt",
+          "sha256": "637efa884d4007bbec93b7d46f19ecc65c46ddcfe71815a910997b3942e1c4c3",
+          "size_bytes": 41524673
+        }
+      ]
+    }
+  },
+  "environment_passed": true,
+  "real_end_to_end_passed": true,
+  "schema_version": "immune-health-tripso-environment/v1"
+}

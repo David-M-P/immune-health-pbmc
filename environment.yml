@@ -1,0 +1,31 @@
+name: immune-health-tripso
+
+# One Linux environment for CPU preparation, TRIPSO GPU training, frozen query
+# projection, aggregation, and healthy-reference fitting.  PyTorch bundles the
+# CUDA 12.1 user-space runtime; the compute node still needs a compatible NVIDIA
+# driver.  Keep the environment name stable so a conda-pack archive can be moved
+# between the local cluster and Gefion.
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+
+dependencies:
+  - python=3.10.14
+  - pip=25.0
+  - setuptools=75.8.2
+  - conda-pack=0.8.1
+  - pytorch=2.4.1
+  - torchvision=0.19.1
+  - pytorch-cuda=12.1
+  - pip:
+      # TRIPSO's reviewed runtime pins.  Do not replace this with the newest
+      # Geneformer environment: the primary model uses TRIPSO's May-2025 assets.
+      - -r tripso_code/tripso/requirements.txt
+      - torchmetrics==1.7.1
+      - pyarrow==18.1.0
+      - safetensors==0.4.5
+      - pytest==8.3.5
+      - ruff==0.9.10
+      - ./tripso_code/tripso
+      - .

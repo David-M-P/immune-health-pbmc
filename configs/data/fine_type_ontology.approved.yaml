@@ -1,0 +1,89 @@
+schema_version: "1.1"
+ontology_id: immune_health_fine_type_v1
+generated: false
+requires_approval: false
+source_candidate:
+  path: fine_type_ontology.generated.yaml
+  sha256: 507ea7d92bbb56d5f7e71ed35cfe09c91a5a852c046723f0cb128c352874f51e
+approval:
+  status: approved
+  approved_by: David
+  approved_at: "2026-07-22"
+approval_policy: >-
+  Preserve raw ctype_low and ctype_low_conf. Identity-map accepted labels at
+  confidence >= 0.70; map lower/missing confidence to low_confidence; map
+  confident unknown or explicitly quarantined off-lineage labels to
+  other_confident. Retain both special categories in composition and model
+  input, but exclude them from uniform rare-type uplift and state/GP-age
+  endpoints.
+minimum_annotation_confidence: 0.70
+approved_lineages: [B cells, CD4_like, CD8_like, Monocytes, NK_ILC]
+special_categories:
+  other_confident:
+    description: Confident label not accepted for this broad lineage
+    retain_in_composition: true
+    state_eligible: false
+    balance_eligible: false
+  low_confidence:
+    description: Missing or below-threshold fine-type annotation confidence
+    retain_in_composition: true
+    state_eligible: false
+    balance_eligible: false
+
+lineages:
+  B cells:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+      - {original_label: Age-associated B cells, canonical_fine_type: Age-associated B cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - {original_label: Memory B cells, canonical_fine_type: Memory B cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - {original_label: Naive B cells, canonical_fine_type: Naive B cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - original_label: MAIT cells
+        canonical_fine_type: other_confident
+        disposition: quarantine_off_lineage
+        state_eligible: false
+        balance_eligible: false
+        rationale: MAIT annotation inside the B-cell lineage
+
+  CD4_like:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+      - {original_label: Regulatory T cells, canonical_fine_type: Regulatory T cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - {original_label: Tcm/Naive helper T cells, canonical_fine_type: Tcm/Naive helper T cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - {original_label: Tem/Effector helper T cells, canonical_fine_type: Tem/Effector helper T cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+
+  CD8_like:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+      - {original_label: Tcm/Naive cytotoxic T cells, canonical_fine_type: Tcm/Naive cytotoxic T cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - {original_label: Tem/Temra cytotoxic T cells, canonical_fine_type: Tem/Temra cytotoxic T cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - {original_label: Tem/Trm cytotoxic T cells, canonical_fine_type: Tem/Trm cytotoxic T cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+
+  Monocytes:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+      - {original_label: Classical monocytes, canonical_fine_type: Classical monocytes, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - {original_label: Non-classical monocytes, canonical_fine_type: Non-classical monocytes, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - original_label: Mast cells
+        canonical_fine_type: other_confident
+        disposition: quarantine_off_lineage
+        state_eligible: false
+        balance_eligible: false
+        rationale: Mast-cell annotation inside the monocyte lineage
+
+  NK_ILC:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+      - {original_label: CD16+ NK cells, canonical_fine_type: CD16+ NK cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - {original_label: ILC3, canonical_fine_type: ILC3, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - {original_label: NK cells, canonical_fine_type: NK cells, disposition: approved_identity, state_eligible: true, balance_eligible: true}
+      - original_label: Tem/Temra cytotoxic T cells
+        canonical_fine_type: other_confident
+        disposition: quarantine_off_lineage
+        state_eligible: false
+        balance_eligible: false
+        rationale: Cytotoxic-T annotation inside the NK/ILC lineage

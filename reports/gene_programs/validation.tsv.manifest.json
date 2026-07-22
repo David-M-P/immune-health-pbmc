@@ -1,0 +1,40 @@
+{
+  "missing_optional_resources": [
+    "collectri",
+    "immune_age"
+  ],
+  "n_configured_resources": 6,
+  "n_valid_programs": 2403,
+  "output": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/reports/gene_programs/validation.tsv",
+  "production_validation": true,
+  "schema_version": "immune-health-gp-resource-validation/v1",
+  "status": "complete",
+  "training_fold_filtering_note": "Expression/donor coverage and redundancy filtering require a declared LODO training fold and are intentionally not inferred here.",
+  "training_fold_filtering_performed": false,
+  "validated_resources": [
+    {
+      "n_programs": 14,
+      "name": "progeny",
+      "path": "/faststorage/project/immunehealth/Projects/david/data/intermediate_data/gene_programs/v1/raw/PROGENY.decoupler.tsv",
+      "sha256": "e1437cd5e8beeb411fdf106f82c5b9cc6a3a1da2c080acddaecd5b73b8f07a33"
+    },
+    {
+      "n_programs": 50,
+      "name": "hallmark",
+      "path": "/faststorage/project/immunehealth/Projects/david/data/intermediate_data/gene_programs/v1/raw/HALLMARK.msigdbr.tsv",
+      "sha256": "db8dc2ed655e920107ed3782f14f5331bcc6d408cab7c5b89faef17c51dd9aba"
+    },
+    {
+      "n_programs": 1839,
+      "name": "reactome",
+      "path": "/faststorage/project/immunehealth/Projects/david/data/intermediate_data/gene_programs/v1/raw/REACTOME.msigdbr.tsv",
+      "sha256": "187aba7681bd8ab942678ef47c2c4551b93ef610d401b7cd1ba05c870e351f6e"
+    },
+    {
+      "n_programs": 500,
+      "name": "existing_curated_gmt",
+      "path": "/faststorage/project/immunehealth/Projects/david/data/intermediate_data/gene_programs/v1/gene_programs_curated.gmt",
+      "sha256": "5240b0ee5dcb309efa877e88b7acedecf70185ec4cb1df7d99281cc59d988a24"
+    }
+  ]
+}

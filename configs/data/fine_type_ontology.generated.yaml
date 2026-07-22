@@ -1,0 +1,588 @@
+schema_version: '1.0'
+generated: true
+requires_approval: true
+approval:
+  status: pending_scientific_review
+  approved_by: null
+  approved_at: null
+generation_policy: Exact audited labels receive identity mappings; no biological merges
+  are inferred.
+minimum_annotation_confidence: 0.7
+special_categories:
+  other_confident:
+    description: Confident label not mapped by the approved ontology
+    retain_in_composition: true
+  low_confidence:
+    description: Missing or below-threshold annotation confidence
+    retain_in_composition: true
+lineages:
+  B cells:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+    - original_label: Age-associated B cells
+      canonical_fine_type: Age-associated B cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      n_cells: 49167
+      n_donors_dataset_qualified: 1786
+      annotation_confidence_mean: 0.8965316762159371
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: MAIT cells
+      canonical_fine_type: MAIT cells
+      generated_identity_mapping: true
+      datasets:
+      - immunobiologyaging
+      n_cells: 52
+      n_donors_dataset_qualified: 28
+      annotation_confidence_mean: 0.7154759157499709
+      found_in_one_dataset: true
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Memory B cells
+      canonical_fine_type: Memory B cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 265909
+      n_donors_dataset_qualified: 2179
+      annotation_confidence_mean: 0.8903420542707368
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Naive B cells
+      canonical_fine_type: Naive B cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 464923
+      n_donors_dataset_qualified: 2177
+      annotation_confidence_mean: 0.9648601611511115
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+  CD4_like:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+    - original_label: Regulatory T cells
+      canonical_fine_type: Regulatory T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 175178
+      n_donors_dataset_qualified: 2101
+      annotation_confidence_mean: 0.9725607804941263
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tcm/Naive helper T cells
+      canonical_fine_type: Tcm/Naive helper T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 2684788
+      n_donors_dataset_qualified: 2180
+      annotation_confidence_mean: 0.9731224958366351
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tem/Effector helper T cells
+      canonical_fine_type: Tem/Effector helper T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 287309
+      n_donors_dataset_qualified: 2121
+      annotation_confidence_mean: 0.9282786704097024
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+  CD8_like:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+    - original_label: Tcm/Naive cytotoxic T cells
+      canonical_fine_type: Tcm/Naive cytotoxic T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 450550
+      n_donors_dataset_qualified: 2175
+      annotation_confidence_mean: 0.9694331680241745
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tem/Temra cytotoxic T cells
+      canonical_fine_type: Tem/Temra cytotoxic T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 581631
+      n_donors_dataset_qualified: 2173
+      annotation_confidence_mean: 0.9645277859285679
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tem/Trm cytotoxic T cells
+      canonical_fine_type: Tem/Trm cytotoxic T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 220633
+      n_donors_dataset_qualified: 2177
+      annotation_confidence_mean: 0.9429830831625161
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+  DC:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+    - original_label: Classical monocytes
+      canonical_fine_type: Classical monocytes
+      generated_identity_mapping: true
+      datasets:
+      - immuneindonesia
+      - onek1k
+      n_cells: 1683
+      n_donors_dataset_qualified: 586
+      annotation_confidence_mean: 0.7335533100284709
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: DC1
+      canonical_fine_type: DC1
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      n_cells: 1440
+      n_donors_dataset_qualified: 589
+      annotation_confidence_mean: 0.9483471419408507
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: DC2
+      canonical_fine_type: DC2
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 29882
+      n_donors_dataset_qualified: 1946
+      annotation_confidence_mean: 0.9083567426170965
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: pDC
+      canonical_fine_type: pDC
+      generated_identity_mapping: true
+      datasets:
+      - onek1k
+      n_cells: 144
+      n_donors_dataset_qualified: 126
+      annotation_confidence_mean: 0.8162568888201877
+      found_in_one_dataset: true
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+  Monocytes:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+    - original_label: Classical monocytes
+      canonical_fine_type: Classical monocytes
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 851493
+      n_donors_dataset_qualified: 2157
+      annotation_confidence_mean: 0.9694055938979941
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Mast cells
+      canonical_fine_type: Mast cells
+      generated_identity_mapping: true
+      datasets:
+      - immunobiologyaging
+      n_cells: 35
+      n_donors_dataset_qualified: 29
+      annotation_confidence_mean: 0.7595947092146235
+      found_in_one_dataset: true
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Non-classical monocytes
+      canonical_fine_type: Non-classical monocytes
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 195007
+      n_donors_dataset_qualified: 2112
+      annotation_confidence_mean: 0.9723789428048867
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+  NK_ILC:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+    - original_label: CD16+ NK cells
+      canonical_fine_type: CD16+ NK cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 1042696
+      n_donors_dataset_qualified: 2179
+      annotation_confidence_mean: 0.9390457701516681
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: ILC3
+      canonical_fine_type: ILC3
+      generated_identity_mapping: true
+      datasets:
+      - immuneindonesia
+      - immunobiologyaging
+      n_cells: 1623
+      n_donors_dataset_qualified: 284
+      annotation_confidence_mean: 0.6584007966035892
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: NK cells
+      canonical_fine_type: NK cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 39323
+      n_donors_dataset_qualified: 2119
+      annotation_confidence_mean: 0.5417363373484548
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tem/Temra cytotoxic T cells
+      canonical_fine_type: Tem/Temra cytotoxic T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - onek1k
+      n_cells: 5288
+      n_donors_dataset_qualified: 905
+      annotation_confidence_mean: 0.7948832171272066
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+  T_others:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+    - original_label: CD16+ NK cells
+      canonical_fine_type: CD16+ NK cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - terekhova
+      n_cells: 11104
+      n_donors_dataset_qualified: 564
+      annotation_confidence_mean: 0.6380361467142506
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: CRTAM+ gamma-delta T cells
+      canonical_fine_type: CRTAM+ gamma-delta T cells
+      generated_identity_mapping: true
+      datasets:
+      - terekhova
+      n_cells: 1782
+      n_donors_dataset_qualified: 146
+      annotation_confidence_mean: 0.5722839223424394
+      found_in_one_dataset: true
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Classical monocytes
+      canonical_fine_type: Classical monocytes
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      n_cells: 779
+      n_donors_dataset_qualified: 250
+      annotation_confidence_mean: 0.6009262547485944
+      found_in_one_dataset: true
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Cycling T cells
+      canonical_fine_type: Cycling T cells
+      generated_identity_mapping: true
+      datasets:
+      - onek1k
+      n_cells: 677
+      n_donors_dataset_qualified: 403
+      annotation_confidence_mean: 0.4775611631905108
+      found_in_one_dataset: true
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: ILC3
+      canonical_fine_type: ILC3
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immunobiologyaging
+      n_cells: 454
+      n_donors_dataset_qualified: 288
+      annotation_confidence_mean: 0.6457808473097703
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: MAIT cells
+      canonical_fine_type: MAIT cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 140132
+      n_donors_dataset_qualified: 2145
+      annotation_confidence_mean: 0.8564007895466335
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Regulatory T cells
+      canonical_fine_type: Regulatory T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 26140
+      n_donors_dataset_qualified: 1706
+      annotation_confidence_mean: 0.39297534707088677
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tcm/Naive cytotoxic T cells
+      canonical_fine_type: Tcm/Naive cytotoxic T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 50770
+      n_donors_dataset_qualified: 2062
+      annotation_confidence_mean: 0.40555892862523113
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tcm/Naive helper T cells
+      canonical_fine_type: Tcm/Naive helper T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 315901
+      n_donors_dataset_qualified: 2177
+      annotation_confidence_mean: 0.3963686388229832
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tem/Effector helper T cells
+      canonical_fine_type: Tem/Effector helper T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 114136
+      n_donors_dataset_qualified: 2124
+      annotation_confidence_mean: 0.39426341500073603
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tem/Temra cytotoxic T cells
+      canonical_fine_type: Tem/Temra cytotoxic T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 145427
+      n_donors_dataset_qualified: 2166
+      annotation_confidence_mean: 0.3620759875081458
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+    - original_label: Tem/Trm cytotoxic T cells
+      canonical_fine_type: Tem/Trm cytotoxic T cells
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 111427
+      n_donors_dataset_qualified: 2152
+      annotation_confidence_mean: 0.3287815861256564
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true
+  pDC:
+    minimum_cells_for_state: 30
+    retain_rare_types_in_composition: true
+    mappings:
+    - original_label: pDC
+      canonical_fine_type: pDC
+      generated_identity_mapping: true
+      datasets:
+      - aidav2
+      - immuneindonesia
+      - immunobiologyaging
+      - onek1k
+      - terekhova
+      n_cells: 30023
+      n_donors_dataset_qualified: 1651
+      annotation_confidence_mean: 0.9975147368858299
+      found_in_one_dataset: false
+      poor_donor_coverage_any_dataset: false
+      marker_expression_sanity: not_evaluated
+      eligible_for_state_by_total_cells: true
+      retain_in_composition: true

@@ -1,0 +1,75 @@
+{
+  "biological_units_by_dataset": {
+    "aidav2": 625,
+    "immuneindonesia": 174,
+    "immunobiologyaging": 234,
+    "onek1k": 981,
+    "terekhova": 166
+  },
+  "datasets": [
+    "aidav2",
+    "immuneindonesia",
+    "immunobiologyaging",
+    "onek1k",
+    "terekhova"
+  ],
+  "folds": {
+    "aidav2": {
+      "path": "lodo_aidav2.tsv",
+      "query_donors": 625,
+      "reference_donors": 1555,
+      "sha256": "9254d2d17cb3ccf4c439b7dc072e7149ad23089fb556834cfe283eb851d4cb38"
+    },
+    "immuneindonesia": {
+      "path": "lodo_immuneindonesia.tsv",
+      "query_donors": 174,
+      "reference_donors": 2006,
+      "sha256": "b15d7226e9171295ff37a24650281daa693bf824a0a5b609dd40519f05982435"
+    },
+    "immunobiologyaging": {
+      "path": "lodo_immunobiologyaging.tsv",
+      "query_donors": 234,
+      "reference_donors": 1946,
+      "sha256": "1f21f09253e7cddc6e3fd77151cc0649dcb70b095b57d147eeb5c8f8b45b2fe3"
+    },
+    "onek1k": {
+      "path": "lodo_onek1k.tsv",
+      "query_donors": 981,
+      "reference_donors": 1199,
+      "sha256": "533ca96ce6c4049f5827eb9adb50da8401cc27cfe85625197c1687a75dd2c461"
+    },
+    "terekhova": {
+      "path": "lodo_terekhova.tsv",
+      "query_donors": 166,
+      "reference_donors": 2014,
+      "sha256": "ee5dcfc0f302a2fad44a389a5e79bb08d84f85d8c69a7eb16c75b3749bf9b290"
+    }
+  },
+  "global_manifest": {
+    "n_donors": 2180,
+    "path": "global_donor_manifest.tsv",
+    "sha256": "708a2d9ff99619d720eefa2f8ce311b1aaeb788aa77130873d29d2980fefc749"
+  },
+  "identifier_columns": {
+    "biological_unit": "biological_unit_id",
+    "dataset": "dataset",
+    "donor": "donor_id",
+    "observation": "observation_id",
+    "sample": "sample_id",
+    "separator": "::",
+    "source_observation": "source_observation_id"
+  },
+  "identifier_definitions": {
+    "biological_unit_id": "dataset::donor_id",
+    "observation_id": "dataset::donor_id::sample_id",
+    "source_observation_id": "dataset::sample_id"
+  },
+  "n_inner_folds": 3,
+  "schema_version": "1.0",
+  "source": {
+    "path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/reports/data_audit/donor_summary.tsv.gz",
+    "sha256": "3f762c6d4d8dd5a31645c63984e59ad3b17d19cd3f06352cf44918d844bf9782"
+  },
+  "source_observation_may_span_donors": true,
+  "split_seed": 42
+}

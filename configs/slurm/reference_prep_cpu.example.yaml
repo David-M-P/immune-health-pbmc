@@ -1,0 +1,15 @@
+schema_version: immune-health-slurm/v1
+account: immunehealth
+time: "04:00:00"
+gpus: 0
+cpus_per_task: 4
+memory: 96G
+environment_activation_script: "<SET_ABSOLUTE_ACTIVATION_SCRIPT>"
+
+# Export these when submitting. They remain infrastructure settings rather than
+# scientific values embedded in Python or Slurm source.
+environment:
+  PROJECT_ROOT: "<SET_REPOSITORY_CHECKOUT>"
+  DATA_ROOT: "<SET_INTERMEDIATE_DATA_ROOT>"
+  REFERENCE_PREP_OUTPUT_ROOT: "<SET_REFERENCE_PREP_OUTPUT_ROOT>"
+  OUTPUT_ROOT: "<SET_SHARED_TRIPSO_OUTPUT_ROOT>"

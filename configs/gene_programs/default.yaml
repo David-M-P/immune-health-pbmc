@@ -1,0 +1,40 @@
+schema_version: 1
+training_fold_specific: true
+mapping_resource: ../data/reference.yaml
+
+resources:
+  progeny:
+    path: ../../../data/intermediate_data/gene_programs/v1/raw/PROGENY.decoupler.tsv
+    required: true
+  hallmark:
+    path: ../../../data/intermediate_data/gene_programs/v1/raw/HALLMARK.msigdbr.tsv
+    required: true
+  reactome:
+    path: ../../../data/intermediate_data/gene_programs/v1/raw/REACTOME.msigdbr.tsv
+    required: true
+  collectri:
+    path: null
+    required: false
+    status: missing_placeholder
+  immune_age:
+    path: null
+    required: false
+    status: requires_scientific_curation
+  existing_curated_gmt:
+    path: ../../../data/intermediate_data/gene_programs/v1/gene_programs_curated.gmt
+    required: true
+
+filters:
+  minimum_mapped_genes: 10
+  maximum_mapped_genes: 200
+  minimum_expression_coverage_by_training_dataset: 0.5
+  minimum_training_donor_coverage: 0.5
+  maximum_jaccard: 0.8
+  maximum_overlap_coefficient: 0.9
+  held_out_dataset_may_influence_filtering: false
+
+synthetic_test_library:
+  production_allowed: false
+  programs:
+    SYNTHETIC_AGE_UP: [GENE_A, GENE_B, GENE_C]
+    SYNTHETIC_AGE_DOWN: [GENE_D, GENE_E, GENE_F]

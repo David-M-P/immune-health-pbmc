@@ -1,0 +1,116 @@
+lineage	scope	dataset	source_dataset_id	n_genes	var_index_name	var_columns	n_missing_unified_ensembl	n_exact_duplicate_ids	n_duplicate_ids_after_version_strip	n_versioned_ensembl_ids	n_ids_matching_human_ensembl_regex	var_index_equals_unified_ensembl	n_common_genes	n_genes_zero_expression	zero_expression_fraction	n_source_genes_outside_common_vocabulary
+B cells	dataset_aggregated_across_source_partitions	aidav2	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1722.0	0.09548100914887718	0.0
+B cells	dataset_aggregated_across_source_partitions	immuneindonesia	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1947.0	0.10795675076240643	0.0
+B cells	dataset_aggregated_across_source_partitions	immunobiologyaging	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1300.0	0.07208206265594677	0.0
+B cells	dataset_aggregated_across_source_partitions	onek1k	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2289.0	0.1269198780149709	0.0
+B cells	dataset_aggregated_across_source_partitions	terekhova	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2263.0	0.12547823676185196	0.0
+B cells	merged	__all__	__all_sources_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	543.0	0.0301081230939839	
+B cells	merged	__all__	__any_source_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	6836.0	0.3790407540892708	
+B cells	merged_h5ad_vocabulary	__all__	__merged__	18035	unified_ensembl	unified_ensembl	0	0	0	0	18035.0	True	18035			
+B cells	source_dataset_id	aidav2	aidav2_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1722.0	0.0954810091488771	18371.0
+B cells	source_dataset_id	immuneindonesia	immuneindonesia_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1947.0	0.1079567507624064	17995.0
+B cells	source_dataset_id	immunobiologyaging	ImmunoAging_b-plasma_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1303.0	0.0722484058774605	42.0
+B cells	source_dataset_id	immunobiologyaging	ImmunoAging_cd8-gdt-mait-dnt_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	6776.0	0.3757138896589964	42.0
+B cells	source_dataset_id	onek1k	onek1k_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2289.0	0.1269198780149709	18536.0
+B cells	source_dataset_id	terekhova	terekhova_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2263.0	0.1254782367618519	18429.0
+CD4_like	dataset_aggregated_across_source_partitions	aidav2	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	880.0	0.048794011644025505	0.0
+CD4_like	dataset_aggregated_across_source_partitions	immuneindonesia	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1570.0	0.08705295259218186	0.0
+CD4_like	dataset_aggregated_across_source_partitions	immunobiologyaging	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	919.0	0.05095647352370391	0.0
+CD4_like	dataset_aggregated_across_source_partitions	onek1k	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1546.0	0.08572220682007209	0.0
+CD4_like	dataset_aggregated_across_source_partitions	terekhova	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1063.0	0.05894094815636263	0.0
+CD4_like	merged	__all__	__all_sources_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	230.0	0.0127529803160521	
+CD4_like	merged	__all__	__any_source_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	7287.0	0.4040476850568339	
+CD4_like	merged_h5ad_vocabulary	__all__	__merged__	18035	unified_ensembl	unified_ensembl	0	0	0	0	18035.0	True	18035			
+CD4_like	source_dataset_id	aidav2	aidav2_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	880.0	0.0487940116440255	18371.0
+CD4_like	source_dataset_id	immuneindonesia	immuneindonesia_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1570.0	0.0870529525921818	17995.0
+CD4_like	source_dataset_id	immunobiologyaging	ImmunoAging_cd4-memory-treg_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1268.0	0.0703077349598003	42.0
+CD4_like	source_dataset_id	immunobiologyaging	ImmunoAging_cd4-naive_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1312.0	0.0727474355420016	42.0
+CD4_like	source_dataset_id	immunobiologyaging	ImmunoAging_cd8-gdt-mait-dnt_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3623.0	0.2008871638480732	42.0
+CD4_like	source_dataset_id	immunobiologyaging	ImmunoAging_other_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	7221.0	0.400388134183532	42.0
+CD4_like	source_dataset_id	onek1k	onek1k_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1546.0	0.085722206820072	18536.0
+CD4_like	source_dataset_id	terekhova	terekhova_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1063.0	0.0589409481563626	18429.0
+CD8_like	dataset_aggregated_across_source_partitions	aidav2	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1128.0	0.06254505128915996	0.0
+CD8_like	dataset_aggregated_across_source_partitions	immuneindonesia	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1927.0	0.10684779595231494	0.0
+CD8_like	dataset_aggregated_across_source_partitions	immunobiologyaging	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1329.0	0.07369004713057943	0.0
+CD8_like	dataset_aggregated_across_source_partitions	onek1k	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2324.0	0.128860548932631	0.0
+CD8_like	dataset_aggregated_across_source_partitions	terekhova	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1559.0	0.08644302744663154	0.0
+CD8_like	merged	__all__	__all_sources_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	435.0	0.0241197671194898	
+CD8_like	merged	__all__	__any_source_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	7039.0	0.3902966454116994	
+CD8_like	merged_h5ad_vocabulary	__all__	__merged__	18035	unified_ensembl	unified_ensembl	0	0	0	0	18035.0	True	18035			
+CD8_like	source_dataset_id	aidav2	aidav2_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1128.0	0.0625450512891599	18371.0
+CD8_like	source_dataset_id	immuneindonesia	immuneindonesia_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1927.0	0.1068477959523149	17995.0
+CD8_like	source_dataset_id	immunobiologyaging	ImmunoAging_cd4-memory-treg_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2774.0	0.1538120321596895	42.0
+CD8_like	source_dataset_id	immunobiologyaging	ImmunoAging_cd8-gdt-mait-dnt_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1398.0	0.077515941225395	42.0
+CD8_like	source_dataset_id	immunobiologyaging	ImmunoAging_nk-ilc_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	7017.0	0.3890767951205988	42.0
+CD8_like	source_dataset_id	onek1k	onek1k_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2324.0	0.128860548932631	18536.0
+CD8_like	source_dataset_id	terekhova	terekhova_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1559.0	0.0864430274466315	18429.0
+DC	dataset_aggregated_across_source_partitions	aidav2	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2621.0	0.1453285278624896	0.0
+DC	dataset_aggregated_across_source_partitions	immuneindonesia	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3269.0	0.18125866370945384	0.0
+DC	dataset_aggregated_across_source_partitions	immunobiologyaging	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3159.0	0.17515941225395065	0.0
+DC	dataset_aggregated_across_source_partitions	onek1k	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3927.0	0.2177432769614638	0.0
+DC	dataset_aggregated_across_source_partitions	terekhova	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3981.0	0.22073745494871083	0.0
+DC	merged	__all__	__all_sources_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1653.0	0.0916551150540615	
+DC	merged	__all__	__any_source_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	5139.0	0.284945938453008	
+DC	merged_h5ad_vocabulary	__all__	__merged__	18035	unified_ensembl	unified_ensembl	0	0	0	0	18035.0	True	18035			
+DC	source_dataset_id	aidav2	aidav2_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2621.0	0.1453285278624896	18371.0
+DC	source_dataset_id	immuneindonesia	immuneindonesia_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3269.0	0.1812586637094538	17995.0
+DC	source_dataset_id	immunobiologyaging	ImmunoAging_dc-monocyte_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3159.0	0.1751594122539506	42.0
+DC	source_dataset_id	onek1k	onek1k_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3927.0	0.2177432769614638	18536.0
+DC	source_dataset_id	terekhova	terekhova_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3981.0	0.2207374549487108	18429.0
+Monocytes	dataset_aggregated_across_source_partitions	aidav2	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	842.0	0.046686997504851675	0.0
+Monocytes	dataset_aggregated_across_source_partitions	immuneindonesia	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1713.0	0.09498197948433601	0.0
+Monocytes	dataset_aggregated_across_source_partitions	immunobiologyaging	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1318.0	0.07308012198502911	0.0
+Monocytes	dataset_aggregated_across_source_partitions	onek1k	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2665.0	0.14776822844469087	0.0
+Monocytes	dataset_aggregated_across_source_partitions	terekhova	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1307.0	0.07247019683947879	0.0
+Monocytes	merged	__all__	__all_sources_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	326.0	0.0180759634044912	
+Monocytes	merged	__all__	__any_source_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	8486.0	0.4705295259218187	
+Monocytes	merged_h5ad_vocabulary	__all__	__merged__	18035	unified_ensembl	unified_ensembl	0	0	0	0	18035.0	True	18035			
+Monocytes	source_dataset_id	aidav2	aidav2_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	842.0	0.0466869975048516	18371.0
+Monocytes	source_dataset_id	immuneindonesia	immuneindonesia_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1713.0	0.094981979484336	17995.0
+Monocytes	source_dataset_id	immunobiologyaging	ImmunoAging_dc-monocyte_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1333.0	0.0739118380925977	42.0
+Monocytes	source_dataset_id	immunobiologyaging	ImmunoAging_other_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	8426.0	0.4672026614915442	42.0
+Monocytes	source_dataset_id	onek1k	onek1k_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2665.0	0.1477682284446908	18536.0
+Monocytes	source_dataset_id	terekhova	terekhova_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1307.0	0.0724701968394787	18429.0
+NK_ILC	dataset_aggregated_across_source_partitions	aidav2	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1512.0	0.08383698364291656	0.0
+NK_ILC	dataset_aggregated_across_source_partitions	immuneindonesia	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2159.0	0.11971167174937622	0.0
+NK_ILC	dataset_aggregated_across_source_partitions	immunobiologyaging	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1395.0	0.07734959800388135	0.0
+NK_ILC	dataset_aggregated_across_source_partitions	onek1k	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2229.0	0.12359301358469642	0.0
+NK_ILC	dataset_aggregated_across_source_partitions	terekhova	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1874.0	0.1039090657055725	0.0
+NK_ILC	merged	__all__	__all_sources_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	513.0	0.0284446908788466	
+NK_ILC	merged	__all__	__any_source_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3319.0	0.1840310507346825	
+NK_ILC	merged_h5ad_vocabulary	__all__	__merged__	18035	unified_ensembl	unified_ensembl	0	0	0	0	18035.0	True	18035			
+NK_ILC	source_dataset_id	aidav2	aidav2_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1512.0	0.0838369836429165	18371.0
+NK_ILC	source_dataset_id	immuneindonesia	immuneindonesia_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2159.0	0.1197116717493762	17995.0
+NK_ILC	source_dataset_id	immunobiologyaging	ImmunoAging_nk-ilc_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1395.0	0.0773495980038813	42.0
+NK_ILC	source_dataset_id	onek1k	onek1k_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2229.0	0.1235930135846964	18536.0
+NK_ILC	source_dataset_id	terekhova	terekhova_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1874.0	0.1039090657055725	18429.0
+T_others	dataset_aggregated_across_source_partitions	aidav2	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1763.0	0.09775436650956473	0.0
+T_others	dataset_aggregated_across_source_partitions	immuneindonesia	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1787.0	0.09908511228167452	0.0
+T_others	dataset_aggregated_across_source_partitions	immunobiologyaging	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1401.0	0.07768228444690879	0.0
+T_others	dataset_aggregated_across_source_partitions	onek1k	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2023.0	0.11217077904075409	0.0
+T_others	dataset_aggregated_across_source_partitions	terekhova	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1833.0	0.10163570834488495	0.0
+T_others	merged	__all__	__all_sources_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	554.0	0.0307180482395342	
+T_others	merged	__all__	__any_source_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	8918.0	0.4944829498197948	
+T_others	merged_h5ad_vocabulary	__all__	__merged__	18035	unified_ensembl	unified_ensembl	0	0	0	0	18035.0	True	18035			
+T_others	source_dataset_id	aidav2	aidav2_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1763.0	0.0977543665095647	18371.0
+T_others	source_dataset_id	immuneindonesia	immuneindonesia_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1787.0	0.0990851122816745	17995.0
+T_others	source_dataset_id	immunobiologyaging	ImmunoAging_cd4-memory-treg_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1706.0	0.0945938453008039	42.0
+T_others	source_dataset_id	immunobiologyaging	ImmunoAging_cd4-naive_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3823.0	0.211976711948988	42.0
+T_others	source_dataset_id	immunobiologyaging	ImmunoAging_cd8-gdt-mait-dnt_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1916.0	0.1062378708067646	42.0
+T_others	source_dataset_id	immunobiologyaging	ImmunoAging_nk-ilc_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	5906.0	0.3274743554200166	42.0
+T_others	source_dataset_id	immunobiologyaging	ImmunoAging_other_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	8729.0	0.4840033268644302	42.0
+T_others	source_dataset_id	onek1k	onek1k_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	2023.0	0.112170779040754	18536.0
+T_others	source_dataset_id	terekhova	terekhova_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1833.0	0.1016357083448849	18429.0
+pDC	dataset_aggregated_across_source_partitions	aidav2	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3719.0	0.20621014693651235	0.0
+pDC	dataset_aggregated_across_source_partitions	immuneindonesia	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3868.0	0.21447186027169393	0.0
+pDC	dataset_aggregated_across_source_partitions	immunobiologyaging	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3194.0	0.17710008317161074	0.0
+pDC	dataset_aggregated_across_source_partitions	onek1k	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	5023.0	0.2785140005544774	0.0
+pDC	dataset_aggregated_across_source_partitions	terekhova	__dataset__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3311.0	0.18358746881064597	0.0
+pDC	merged	__all__	__all_sources_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	1884.0	0.1044635431106182	
+pDC	merged	__all__	__any_source_zero__	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	5809.0	0.3220959245910729	
+pDC	merged_h5ad_vocabulary	__all__	__merged__	18035	unified_ensembl	unified_ensembl	0	0	0	0	18035.0	True	18035			
+pDC	source_dataset_id	aidav2	aidav2_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3719.0	0.2062101469365123	18371.0
+pDC	source_dataset_id	immuneindonesia	immuneindonesia_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3868.0	0.2144718602716939	17995.0
+pDC	source_dataset_id	immunobiologyaging	ImmunoAging_dc-monocyte_cells_standardized	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3194.0	0.1771000831716107	42.0
+pDC	source_dataset_id	onek1k	onek1k_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	5023.0	0.2785140005544774	18536.0
+pDC	source_dataset_id	terekhova	terekhova_std	18035	unified_ensembl	unified_ensembl	0	0	0	0		True	18035	3311.0	0.1835874688106459	18429.0

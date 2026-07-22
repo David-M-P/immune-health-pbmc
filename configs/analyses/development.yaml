@@ -4,14 +4,18 @@ run:
 
 datasets:
   healthy:
-    - "<DEVELOPMENT_HEALTHY_DATASET_1>"
-    - "<DEVELOPMENT_HEALTHY_DATASET_2>"
+    - aidav2
+    - immuneindonesia
+    - immunobiologyaging
+    - onek1k
+    - terekhova
   validation: []
   query: []
 
 sampling:
-  max_donors_per_dataset: 5
-  max_cells_per_donor: 2000
+  max_donors_per_dataset: 3
+  max_cells_per_donor: 100
+  sampler_modes: [hybrid]
 
 models:
   tripso:

@@ -1,0 +1,102 @@
+schema_version: immune-health-reference-preparation/v1
+
+seed: 42
+healthy_datasets:
+  - aidav2
+  - immuneindonesia
+  - immunobiologyaging
+  - onek1k
+  - terekhova
+
+lineages:
+  B_cells: B cells
+  NK_ILC: NK_ILC
+  Monocytes: Monocytes
+  CD4_like: CD4_like
+  CD8_like: CD8_like
+
+paths:
+  merged_root: "${DATA_ROOT}/reference_lineages/merged"
+  split_root: "${PROJECT_ROOT}/splits"
+  gene_programs: "${DATA_ROOT}/gene_programs/v1/gene_programs_curated.gmt"
+  fine_type_ontology: "${PROJECT_ROOT}/configs/data/fine_type_ontology.approved.yaml"
+  fine_type_ontology_source_candidate: "${PROJECT_ROOT}/configs/data/fine_type_ontology.generated.yaml"
+  output_root: "${REFERENCE_PREP_OUTPUT_ROOT}"
+
+fine_type_annotation:
+  source_label_field: ctype_low
+  source_confidence_field: ctype_low_conf
+  canonical_field: fine_type
+  minimum_confidence: 0.70
+  approval_status: approved
+  approved_by: David
+  approved_at: "2026-07-22"
+  retain_special_categories_in_composition: true
+  special_categories_balance_eligible: false
+  special_categories_state_eligible: false
+
+visit_selection:
+  dataset: terekhova
+  policy: seeded_hash_one_observation_per_reference_donor
+  # Donors remain the replicate in production, including when Terekhova is the
+  # LODO query. Longitudinal all-visit scoring is a separate explicit sensitivity.
+  preserve_all_visits_when_query: false
+
+features:
+  hvg_sizes: [3000, 9000]
+  hvg_mean_bins: 20
+  hvg_minimum_donor_fraction: 0.01
+  hvg_minimum_dataset_fraction: 0.75
+  gp_minimum_mapped_genes: 10
+  gp_maximum_program_size: 200
+  gp_minimum_expression_coverage: 0.001
+  gp_minimum_donor_coverage: 0.05
+  gp_minimum_dataset_fraction: 0.75
+  gp_redundancy_jaccard_threshold: 0.8
+  # Broad-lineage donor-pseudobulk age effects are a training-only storage gate
+  # for per-cell projection. Fine-type TRIPSO effects are screened again later.
+  gp_transfer_minimum_donors_per_cohort: 20
+  gp_transfer_minimum_age_span: 10.0
+  gp_transfer_minimum_cohorts: 3
+  gp_transfer_minimum_sign_concordance: 0.75
+  gp_transfer_maximum_i2: 0.75
+  gp_transfer_maximum_fdr: 0.05
+  gp_transfer_minimum_absolute_standardized_slope_per_decade: 0.0
+  # Optional controls must be named before feature jobs run and must survive the
+  # training-only GP filter. An empty statistical+control union fails closed.
+  gp_projection_control_ids: []
+  count_chunk_size: 20000
+
+materialization:
+  # The fixed inner donor fold is the only model-selection target. Outer-query
+  # artifacts are prepared for later locked evaluation, never for selection.
+  roles: [adaptation, validation, query]
+  hvg_sizes: [3000, 9000]
+  row_chunk_size: 25000
+  max_loaded_elements: 100000000
+  cell_downsampling: false
+
+lodo_reference:
+  # Fixed before any model is trained. Feature/HVG/GP selection sees adaptation
+  # donors only; this donor fold is projected for Stage-1/2 model selection.
+  inner_validation_fold: 0
+  inner_fold_column: inner_fold
+  selection_uses_outer_query: false
+
+final_reference:
+  enabled: true
+  design: all_healthy
+  fold_output_dir: "${REFERENCE_PREP_OUTPUT_ROOT}/folds/all_healthy"
+  # Set to 0/1/2 only for an inner model-selection run. Keep null for the final
+  # fit so every eligible donor from all five cohorts enters adaptation.
+  inner_validation_fold: null
+  inner_fold_column: global_inner_fold
+
+tokenization:
+  lodo_enabled: true
+  final_reference_enabled: true
+  output_root: "${OUTPUT_ROOT}/tripso_inputs"
+  vendor_root: "${PROJECT_ROOT}/tripso_code/tripso"
+  row_chunk_size: 20000
+  nproc: 4
+  minimum_tokenizable_gp_genes: 10

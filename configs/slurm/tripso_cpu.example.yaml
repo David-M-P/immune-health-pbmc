@@ -1,0 +1,9 @@
+schema_version: immune-health-slurm/v1
+account: immunehealth
+partition: "<SET_CLUSTER_CPU_PARTITION>"
+time: "<SET_WALLTIME>"
+gpus: 0
+cpus_per_task: "<SET_CPUS_PER_TASK>"
+memory: "<SET_MEMORY_REQUEST>"
+environment_activation_script: "<SET_ABSOLUTE_ACTIVATION_SCRIPT>"
+

@@ -1,0 +1,16 @@
+{
+  "mapping_resource_version": "audit_2026-07-17",
+  "n_duplicate_query_ids_after_strip": 0,
+  "n_duplicate_resource_pairs_after_strip": 0,
+  "n_many_to_one_query_symbols": 9,
+  "n_many_to_one_resource_symbols": 104,
+  "n_mapped_query_ids": 18035,
+  "n_mapping_resource_rows": 36406,
+  "n_one_to_many_query_ids": 0,
+  "n_one_to_many_resource_ids": 0,
+  "n_query_ids": 18035,
+  "n_unique_ids_after_strip": 18035,
+  "n_unique_resource_pairs_after_strip": 36406,
+  "n_unmapped_query_ids": 0,
+  "n_version_suffixes_stripped": 0
+}

@@ -1,0 +1,96 @@
+{
+  "checkpoint": {
+    "path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/reports/real_tripso_base_smoke/checkpoints/last.ckpt",
+    "sha256": "5c4dd860c9336ce34be421aaec6cd5cfcbcd96386f09c0ab1701f9b652dc12b6",
+    "size_bytes": 81858014,
+    "state_dict_entries": 41
+  },
+  "data": {
+    "genes": [
+      "ENSG00000000003",
+      "ENSG00000000005",
+      "ENSG00000000419",
+      "ENSG00000000457",
+      "ENSG00000000460",
+      "ENSG00000000938",
+      "ENSG00000000971",
+      "ENSG00000001036",
+      "ENSG00000001084",
+      "ENSG00000001167",
+      "ENSG00000001460",
+      "ENSG00000001461"
+    ],
+    "gp_library_path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/reports/real_tripso_base_smoke/tiny_gp_library.csv",
+    "gp_size": 8,
+    "n_cells": 10,
+    "sequence_length_including_cls": 13,
+    "tokenized_dataset_path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/reports/real_tripso_base_smoke/tokenized.dataset",
+    "tokens": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "environment": {
+    "accelerator": "cpu",
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "python": "3.10.14 | packaged by conda-forge | (main, Mar 20 2024, 12:45:18) [GCC 12.3.0]",
+    "pytorch_lightning": "2.4.0",
+    "torch": "2.4.1"
+  },
+  "model": {
+    "bert_config": {
+      "hidden_size": 512,
+      "max_seq_len": 12,
+      "mlm_masking_prob": 1.0,
+      "num_attention_heads": 8,
+      "num_hidden_layers": 1,
+      "tokenization_input_size": 4096,
+      "tokenization_vocab_size": 20275,
+      "torch_dtype": "float32",
+      "use_flash": false,
+      "use_l2_norm": false,
+      "use_pos_emb": "sin_cos"
+    },
+    "calc_gene_loss": true,
+    "calc_gp_loss": true,
+    "embedding_init": "geneformer-static",
+    "fm_encoder_pkg": "from_scratch",
+    "gene_identifier_format": "ensembl",
+    "hidden_size": 512,
+    "model_type": "Base",
+    "static_embedding_path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Utils/gf-12L-95M-i4096_word_embeddings_may2025.pt",
+    "static_embedding_sha256": "637efa884d4007bbec93b7d46f19ecc65c46ddcfe71815a910997b3942e1c4c3"
+  },
+  "passed": true,
+  "run_type": "real_vendored_tripso_base_training_smoke",
+  "scope": "One real CPU/CUDA forward, backward, optimizer step, and checkpoint; not a convergence, biological-validity, dynamic-sampler, or full-data test",
+  "synthetic_data": true,
+  "training": {
+    "batch_size": 2,
+    "elapsed_seconds": 1.9234590260311961,
+    "epochs": 1,
+    "gene_masking_loss": 2.5981035232543945,
+    "gp_masking_loss": 2.1211178302764893,
+    "limit_train_batches": 1,
+    "monitored_gp_decoder_maximum_absolute_change": 0.00010000169277191162,
+    "optimizer_steps": 1,
+    "train_loss": 4.719221115112305
+  },
+  "vendor": {
+    "module_path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/__init__.py",
+    "token_dictionary_path": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso/tripso/Utils/geneformer_token_dictionary_may2025.pkl",
+    "token_dictionary_sha256": "67c445f4385127adfc48dcc072320cd65d6822829bf27dd38070e6e787bc597f",
+    "vendor_root_requested": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/tripso_code/tripso"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "immune-health-downstream-candidate-plan/v1",
+  "selection_scope": "training_or_inner_validation_only",
+  "outer_query_results_used_for_selection": false,
+  "healthy_reference": {
+    "minimum_exact_sex_donors": 20
+  },
+  "fine_type_universe": {
+    "path": "<FROZEN_FINE_TYPE_UNIVERSE_JSON_OR_YAML>",
+    "sha256": "<FILE_SHA256>"
+  },
+  "models": [
+    {
+      "parent_training_job_id": "<SELECTED_TRAINING_JOB_ID>",
+      "model_selection_status": "selected",
+      "selection_group_id": "<SAME_GROUP_ACROSS_REQUIRED_SEEDS>",
+      "lineage": "<LINEAGE>",
+      "candidate_endpoints": [
+        {"gp_id": "<TRAINING_ONLY_CANDIDATE_GP>", "fine_type": "<FINE_TYPE>"}
+      ],
+      "cell_metadata": {
+        "reference": {"path": "<REFERENCE_CELL_METADATA>", "sha256": "<SHA256>"},
+        "validation": {"path": "<VALIDATION_CELL_METADATA>", "sha256": "<SHA256>"},
+        "query": {"path": "<LOCKED_QUERY_CELL_METADATA>", "sha256": "<SHA256>"}
+      },
+      "scoring_resources": {
+        "validation": {
+          "query_genes": {"path": "<VALIDATION_GENE_IDS>", "sha256": "<SHA256>"},
+          "frozen_vocabulary": {"path": "<FROZEN_VOCABULARY>", "sha256": "<SHA256>"},
+          "gp_coverage": {"<TRAINING_ONLY_CANDIDATE_GP>": 1.0}
+        },
+        "query": {
+          "query_genes": {"path": "<QUERY_GENE_IDS>", "sha256": "<SHA256>"},
+          "frozen_vocabulary": {"path": "<FROZEN_VOCABULARY>", "sha256": "<SHA256>"},
+          "gp_coverage": {"<TRAINING_ONLY_CANDIDATE_GP>": 1.0}
+        }
+      },
+      "n_cell_bootstrap": 100
+    }
+  ],
+  "manifest_sha256": "<CANONICAL_SHA256_OF_ALL_PRECEDING_CONTENT>"
+}

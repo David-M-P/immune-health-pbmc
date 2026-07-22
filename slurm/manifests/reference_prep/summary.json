@@ -1,0 +1,24 @@
+{
+  "job_counts": {
+    "features": 30,
+    "final_bind": 10,
+    "final_fold": 1,
+    "final_tokenize": 10,
+    "lodo_bind": 50,
+    "lodo_tokenize": 150,
+    "materialize": 160,
+    "visits": 1
+  },
+  "requires_afterok_dependencies": true,
+  "schema_version": "immune-health-reference-preparation-jobs/v1",
+  "submission_order": [
+    "visits",
+    "final_fold",
+    "features",
+    "materialize",
+    "lodo_tokenize",
+    "lodo_bind",
+    "final_tokenize",
+    "final_bind"
+  ]
+}

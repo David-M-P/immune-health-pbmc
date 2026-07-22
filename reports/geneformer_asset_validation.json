@@ -1,0 +1,79 @@
+{
+  "allow_patterns": [
+    "gf-12L-95M-i4096/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "files": {
+    "config.json": {
+      "sha256": "f56780389d8c89c1b6c4084e2e6ee1f736558e4b3bb8ce7473159e83465de401",
+      "size_bytes": 591
+    },
+    "generation_config.json": {
+      "sha256": "07f46e7e174ffc98dd5072d6a7e0df8935f44046258d30dbf7b78edadcd44af4",
+      "size_bytes": 90
+    },
+    "model.safetensors": {
+      "sha256": "4365ba23e393fcfa0e65a94ac64a0983cd788bd23a8d4914f4ab66f85cfe043c",
+      "size_bytes": 152012980
+    },
+    "training_args.bin": {
+      "sha256": "21a45980734b138029422e95a5601def858821a9ec02cd473938b9f525ac108d",
+      "size_bytes": 4920
+    }
+  },
+  "license": "Apache-2.0 (upstream model repository)",
+  "model": "gf-12L-95M-i4096",
+  "output_root": "/faststorage/project/immunehealth/Projects/david/external_assets/Geneformer",
+  "primary_analysis_requires_full_model": false,
+  "purpose": "full-Geneformer sensitivity analysis",
+  "repository": "ctheodoris/Geneformer",
+  "revision": "94d98d1774fc21920d2f01dbd23bc22d232a6ec2",
+  "schema_version": "immune-health-geneformer-asset/v1",
+  "sftp_transfer_root": "/faststorage/project/immunehealth/Projects/david/external_assets/Geneformer/gf-12L-95M-i4096",
+  "source_url": "https://huggingface.co/ctheodoris/Geneformer/tree/94d98d1774fc21920d2f01dbd23bc22d232a6ec2/gf-12L-95M-i4096",
+  "static_embedding_alignment": {
+    "checked": true,
+    "exact_tensor_equality": true,
+    "full_dtype": "torch.float32",
+    "full_shape": [
+      20275,
+      512
+    ],
+    "passed": true,
+    "static_dtype": "torch.float32",
+    "static_embedding_sha256": "637efa884d4007bbec93b7d46f19ecc65c46ddcfe71815a910997b3942e1c4c3",
+    "static_shape": [
+      20275,
+      512
+    ]
+  },
+  "upstream_metadata_files": {
+    "README.md": {
+      "sha256": "319ba1ebaa380a640f6cd575cc8682d764672f1043ae9d7f0e125812f2f1714c",
+      "size_bytes": 8418
+    }
+  },
+  "validate_only": true,
+  "validation": {
+    "config": {
+      "hidden_size": 512,
+      "intermediate_size": 1024,
+      "max_position_embeddings": 4096,
+      "num_attention_heads": 8,
+      "num_hidden_layers": 12,
+      "vocab_size": 20275
+    },
+    "hashes": {
+      "config.json": "f56780389d8c89c1b6c4084e2e6ee1f736558e4b3bb8ce7473159e83465de401",
+      "model.safetensors": "4365ba23e393fcfa0e65a94ac64a0983cd788bd23a8d4914f4ab66f85cfe043c"
+    },
+    "hashes_pinned": true,
+    "model_directory": "/faststorage/project/immunehealth/Projects/david/external_assets/Geneformer/gf-12L-95M-i4096",
+    "model_name": "gf-12L-95M-i4096",
+    "passed": true,
+    "root": "/faststorage/project/immunehealth/Projects/david/external_assets/Geneformer",
+    "source_revision": "94d98d1774fc21920d2f01dbd23bc22d232a6ec2",
+    "weights_file": "/faststorage/project/immunehealth/Projects/david/external_assets/Geneformer/gf-12L-95M-i4096/model.safetensors"
+  }
+}

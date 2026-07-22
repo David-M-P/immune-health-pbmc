@@ -1,0 +1,16 @@
+schema_version: immune-health-slurm/v1
+account: "<SET_GEFION_ACCOUNT>"
+partition: "<SET_GEFION_GPU_PARTITION>"
+time: "<SET_GEFION_WALLTIME>"
+gpus: "<SET_GEFION_GPU_REQUEST>"
+cpus_per_task: "<SET_GEFION_CPUS_PER_TASK>"
+memory: "<SET_GEFION_MEMORY_REQUEST>"
+environment_activation_script: "<SET_GEFION_ACTIVATION_SCRIPT>"
+
+environment:
+  PROJECT_ROOT: "<SET_GEFION_REPOSITORY_CHECKOUT>"
+  OUTPUT_ROOT: "<SET_GEFION_OUTPUT_ROOT>"
+  TRIPSO_JOB_MANIFEST: "<SET_GEFION_JOB_MANIFEST>"
+  # Required only for the gated full-12-layer Geneformer sensitivity and its
+  # frozen projections; the hybrid static-initialized Base does not read it.
+  TRIPSO_GENEFORMER_ROOT: "<SET_GEFION_GENEFORMER_ASSET_ROOT>"

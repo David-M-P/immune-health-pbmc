@@ -1,0 +1,131 @@
+dataset	lineage	fine_type	n_cells	n_donors	annotation_confidence_mean	n_below_confidence_threshold	dataset_support_within_lineage	found_in_one_dataset	poor_donor_coverage	poor_mean_confidence	marker_expression_sanity	marker_expression_note
+aidav2	B cells	Age-associated B cells	3551	560	0.9425400571535406	502	4	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	B cells	Memory B cells	40448	624	0.9380529686680152	5963	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	B cells	Naive B cells	41968	623	0.985073694068877	1473	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	CD4_like	Regulatory T cells	11532	621	0.9822102835170072	732	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	CD4_like	Tcm/Naive helper T cells	273758	625	0.9822293130578904	16318	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	CD4_like	Tem/Effector helper T cells	70625	624	0.9440619636921492	14691	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	CD8_like	Tcm/Naive cytotoxic T cells	100875	624	0.989704587056418	3199	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	CD8_like	Tem/Temra cytotoxic T cells	102762	622	0.9706927268787716	10628	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	CD8_like	Tem/Trm cytotoxic T cells	42421	623	0.9617360600623668	6055	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	DC	DC1	734	334	0.9567510906365664	69	3	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	DC	DC2	10066	568	0.9621138326286456	1005	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	Monocytes	Classical monocytes	223979	625	0.974811289102785	13892	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	Monocytes	Non-classical monocytes	49003	612	0.982637252429907	2124	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	NK_ILC	CD16+ NK cells	150720	624	0.9572775654795236	14653	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	NK_ILC	NK cells	5954	599	0.5117281017799364	4841	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	NK_ILC	Tem/Temra cytotoxic T cells	3833	363	0.918574648711362	804	2	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	CD16+ NK cells	516	65	0.7481947270635538	231	4	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	Classical monocytes	779	250	0.6009262547485944	490	1	True	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	ILC3	408	248	0.6712535083374515	250	2	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	MAIT cells	31985	623	0.9111056232374536	5654	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	Regulatory T cells	601	347	0.4508956373072918	601	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	Tcm/Naive cytotoxic T cells	3413	548	0.396233739347633	3413	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	Tcm/Naive helper T cells	12538	622	0.455020830678307	12538	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	Tem/Effector helper T cells	12857	612	0.4519962160892525	12857	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	Tem/Temra cytotoxic T cells	11774	612	0.4114632113848126	11774	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	T_others	Tem/Trm cytotoxic T cells	8928	598	0.3825298999951003	8928	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+aidav2	pDC	pDC	3864	453	0.9999029411664596	1	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	B cells	Age-associated B cells	6763	172	0.8040525308585789	2737	4	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	B cells	Memory B cells	17673	174	0.8499447873393813	5387	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	B cells	Naive B cells	18716	174	0.9165144952247736	3224	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	CD4_like	Regulatory T cells	2549	167	0.9640446782190536	350	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	CD4_like	Tcm/Naive helper T cells	82629	174	0.9626818547416598	11579	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	CD4_like	Tem/Effector helper T cells	11929	167	0.9070266447865633	4575	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	CD8_like	Tcm/Naive cytotoxic T cells	18990	173	0.9603971736856614	2739	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	CD8_like	Tem/Temra cytotoxic T cells	16180	174	0.9180447623329044	5396	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	CD8_like	Tem/Trm cytotoxic T cells	22286	174	0.9304400148685538	6245	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	DC	Classical monocytes	800	150	0.7677151085500106	423	2	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	DC	DC1	193	96	0.8415036386924395	62	3	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	DC	DC2	1428	171	0.7485852846004436	763	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	Monocytes	Classical monocytes	37992	174	0.9182480619426232	6973	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	Monocytes	Non-classical monocytes	11184	174	0.8904666199870949	2537	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	NK_ILC	CD16+ NK cells	48570	174	0.7844351480764018	19649	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	NK_ILC	ILC3	100	66	0.5777155923138326	68	2	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	NK_ILC	NK cells	1464	165	0.5024115786330996	1245	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	T_others	CD16+ NK cells	3468	173	0.5194229718462884	2629	4	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	T_others	MAIT cells	8856	174	0.7488256489870426	4160	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	T_others	Regulatory T cells	683	159	0.3579090092588769	683	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	T_others	Tcm/Naive cytotoxic T cells	2362	172	0.4540447766699694	2362	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	T_others	Tcm/Naive helper T cells	16465	174	0.3942473563988797	16465	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	T_others	Tem/Effector helper T cells	7017	168	0.3971531550555313	7017	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	T_others	Tem/Temra cytotoxic T cells	13238	174	0.3344055074975109	13238	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	T_others	Tem/Trm cytotoxic T cells	16135	174	0.3300477866431556	16135	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immuneindonesia	pDC	pDC	1708	174	0.9837258869090676	62	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	B cells	Age-associated B cells	34508	234	0.9407048913302708	4528	4	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	B cells	MAIT cells	52	28	0.7154759157499709	28	1	True	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	B cells	Memory B cells	129062	234	0.9168550083587326	22810	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	B cells	Naive B cells	290484	234	0.991935477063692	5062	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	CD4_like	Regulatory T cells	124139	234	0.9749126794196628	11941	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	CD4_like	Tcm/Naive helper T cells	1115044	234	0.9755820923695924	96114	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	CD4_like	Tem/Effector helper T cells	90596	234	0.9130362854193332	32045	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	CD8_like	Tcm/Naive cytotoxic T cells	162110	234	0.9550029213606392	26069	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	CD8_like	Tem/Temra cytotoxic T cells	304383	234	0.9824976757530144	18251	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	CD8_like	Tem/Trm cytotoxic T cells	73955	234	0.9420749638811656	16697	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	DC	DC1	513	159	0.9765192623780596	23	3	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	DC	DC2	11099	233	0.924708580253543	2054	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	Monocytes	Classical monocytes	297429	234	0.9695919848562063	22347	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	Monocytes	Mast cells	35	29	0.7595947092146235	14	1	True	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	Monocytes	Non-classical monocytes	63941	234	0.9792862439610122	3239	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	NK_ILC	CD16+ NK cells	488490	234	0.9806319161708212	20126	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	NK_ILC	ILC3	1523	218	0.6636985775812488	958	2	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	NK_ILC	NK cells	17245	234	0.5942499747522701	13479	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	T_others	CD16+ NK cells	6748	223	0.6785406385060652	3842	4	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	T_others	ILC3	46	40	0.4198494190642494	41	2	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	T_others	MAIT cells	61144	234	0.8683613993393137	13534	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	T_others	Regulatory T cells	18609	234	0.3816235703702119	18609	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	T_others	Tcm/Naive cytotoxic T cells	28741	234	0.3922835725485398	28741	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	T_others	Tcm/Naive helper T cells	161826	234	0.359006107529885	161826	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	T_others	Tem/Effector helper T cells	63591	234	0.3624122057718129	63591	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	T_others	Tem/Temra cytotoxic T cells	23829	234	0.3811311050432879	23829	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	T_others	Tem/Trm cytotoxic T cells	45588	234	0.2883808607069119	45588	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+immunobiologyaging	pDC	pDC	12255	233	0.9988058154335092	39	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	B cells	Age-associated B cells	4345	820	0.6520509839666748	3091	4	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	B cells	Memory B cells	47458	981	0.8042165212782849	20848	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	B cells	Naive B cells	73706	980	0.8585760398962362	22354	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	CD4_like	Regulatory T cells	6016	913	0.9292048396277072	1706	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	CD4_like	Tcm/Naive helper T cells	512067	981	0.9620441967261938	68300	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	CD4_like	Tem/Effector helper T cells	10650	930	0.8861577561717991	5192	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	CD8_like	Tcm/Naive cytotoxic T cells	51078	978	0.9491918706934244	9548	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	CD8_like	Tem/Temra cytotoxic T cells	56103	977	0.9014559307312068	22803	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	CD8_like	Tem/Trm cytotoxic T cells	31429	980	0.9109474273985292	11388	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	DC	Classical monocytes	883	436	0.702602643191289	568	2	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	DC	DC2	3085	814	0.8084712003763381	1486	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	DC	pDC	144	126	0.8162568888201877	65	1	True	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	Monocytes	Classical monocytes	33230	958	0.91424853199196	7665	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	Monocytes	Non-classical monocytes	15476	926	0.9439070185352052	2156	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	NK_ILC	CD16+ NK cells	157765	981	0.8346773689100639	52644	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	NK_ILC	NK cells	8320	958	0.4454058658338125	7681	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	NK_ILC	Tem/Temra cytotoxic T cells	1455	542	0.4690349303491534	1302	2	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	T_others	Cycling T cells	677	403	0.4775611631905108	580	1	True	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	T_others	MAIT cells	13537	948	0.6442202149257013	8821	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	T_others	Regulatory T cells	2521	800	0.4019934380398733	2521	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	T_others	Tcm/Naive cytotoxic T cells	8099	942	0.4357484177302562	8099	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	T_others	Tcm/Naive helper T cells	74870	981	0.4287583882074445	74870	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	T_others	Tem/Effector helper T cells	8293	944	0.4111081991599569	8293	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	T_others	Tem/Temra cytotoxic T cells	57899	980	0.3514490401717673	57899	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	T_others	Tem/Trm cytotoxic T cells	24704	980	0.3611622780211362	24704	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+onek1k	pDC	pDC	1776	625	0.988316550763243	39	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	B cells	Memory B cells	31268	166	0.8727413281989564	8516	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	B cells	Naive B cells	40049	166	0.9654930685307316	3091	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	CD4_like	Regulatory T cells	30942	166	0.9686598185451412	3580	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	CD4_like	Tcm/Naive helper T cells	701290	166	0.9749760923491648	60014	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	CD4_like	Tem/Effector helper T cells	103509	166	0.937633481805878	24312	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	CD8_like	Tcm/Naive cytotoxic T cells	117497	166	0.9821984846645696	7333	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	CD8_like	Tem/Temra cytotoxic T cells	102203	166	0.9467921517256196	20768	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	CD8_like	Tem/Trm cytotoxic T cells	50542	166	0.9540238685170584	8890	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	DC	DC2	4204	160	0.8640400503900154	1342	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	Monocytes	Classical monocytes	258863	166	0.9791027921789462	13251	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	Monocytes	Non-classical monocytes	55403	166	0.9798224247212648	2733	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	NK_ILC	CD16+ NK cells	197151	166	0.9436757546577924	22245	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	NK_ILC	NK cells	6340	163	0.5625742438637962	4806	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	T_others	CD16+ NK cells	372	103	0.8562736530870692	102	4	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	T_others	CRTAM+ gamma-delta T cells	1782	146	0.5722839223424394	1380	1	True	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	T_others	MAIT cells	24610	166	0.9110094954659664	4890	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	T_others	Regulatory T cells	3726	166	0.4406540426112965	3726	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	T_others	Tcm/Naive cytotoxic T cells	8155	166	0.4122230162599782	8155	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	T_others	Tcm/Naive helper T cells	50202	166	0.4545486752010778	50202	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	T_others	Tem/Effector helper T cells	22378	166	0.4444559488055656	22378	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	T_others	Tem/Temra cytotoxic T cells	38687	166	0.3606812520295867	38687	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	T_others	Tem/Trm cytotoxic T cells	16072	166	0.3624774899476791	16072	5	False	False	True	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel
+terekhova	pDC	pDC	10420	166	0.9989386471902312	14	5	False	False	False	not_evaluated	Requires a lineage-specific expression matrix and approved marker panel

@@ -1,0 +1,33 @@
+{
+  "base_seed": 42,
+  "experiment_config": "/faststorage/project/immunehealth/Projects/david/immune-health-pbmc/configs/experiments/tripso_lodo.yaml",
+  "hvg_sizes": [
+    3000,
+    9000
+  ],
+  "model_selection": {
+    "inner_fold_column": "inner_fold",
+    "inner_validation_fold": 0,
+    "outer_query_evaluation_only": true,
+    "outer_query_used_for_selection": false,
+    "role": "validation"
+  },
+  "primary_samplers": [
+    "native_all_cells",
+    "donor_uniform_observed",
+    "hybrid"
+  ],
+  "schema_version": "immune-health-slurm-manifest-summary/v1",
+  "stages": {
+    "stage1": {
+      "jobs": 150,
+      "pending_selection_jobs": 0,
+      "reused_seed_offsets": [],
+      "runnable_jobs": 150,
+      "seed_offsets": [
+        0
+      ]
+    }
+  },
+  "submitted": false
+}

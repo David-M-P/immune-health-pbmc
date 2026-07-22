@@ -1,0 +1,12 @@
+schema_version: immune-health-slurm/v1
+account: immunehealth
+time: "04:00:00"
+gpus: 0
+cpus_per_task: 4
+memory: 96G
+environment_activation_script: "<SET_ABSOLUTE_ACTIVATION_SCRIPT>"
+
+environment:
+  PROJECT_ROOT: "<SET_REPOSITORY_CHECKOUT>"
+  OUTPUT_ROOT: "<SET_DOWNSTREAM_OUTPUT_ROOT>"
+  TRIPSO_JOB_MANIFEST: "<SET_ONE_GENERATED_DOWNSTREAM_JSONL>"

@@ -1,0 +1,6 @@
+dataset	n_cells	n_biological_units	n_samples	n_source_sample_ids	n_donor_observations	n_donors_with_repeated_samples	n_donors_with_multiple_age_values	n_donors_with_multiple_sex_values	age_missing_donors	age_min	age_max	female_donors	male_donors	unknown_sex_donors
+aidav2	1219892	625	625	625	625	0	0	0	0	19.0	77.0	350	275	0
+immuneindonesia	369378	174	174	174	174	0	0	0	0	18.0	60.0	78	96	0
+immunobiologyaging	3626985	234	234	234	234	0	0	0	0	40.0	89.0	137	97	0
+onek1k	1205586	981	75	75	981	0	0	0	0	19.0	97.0	565	416	0
+terekhova	1875665	166	317	317	317	102	102	0	0	25.0	81.0	36	130	0

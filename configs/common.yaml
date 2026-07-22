@@ -1,36 +1,111 @@
 project:
   name: immune_health_pbmc
   random_seed: 42
+  output_schema_version: "1.0"
 
 annotation:
   config: configs/annotation/celltypist_v1.yaml
   version: lineage_v1_celltypist
-  column: analysis_lineage
-  confidence_column: annotation_confidence
+  column: lineage
+  confidence_column: ctype_high_conf
+  fine_type_column: ctype_low
+  fine_type_confidence_column: ctype_low_conf
+  minimum_fine_type_confidence: 0.7
   allow_unknown: true
 
 lineages:
-  - T_and_NK
-  - B
-  - Plasma
-  - Mono_and_DC
-  - pDC
-  - Platelets
-  - RBC_and_HSPC
-  - Cycling
-  - Doublet_or_ambiguous
-  - Unknown
+  primary:
+    - B cells
+    - NK_ILC
+    - Monocytes
+    - CD4_like
+    - CD8_like
+  audit_only:
+    - T_others
+    - DC
+    - pDC
 
 aggregation:
   biological_unit: donor
-  min_cells_per_donor_lineage: 30
-  cell_cap_per_donor_lineage: 5000
+  biological_unit_id_field: biological_unit_id
+  biological_unit_fields: [dataset, donor_id]
+  biological_unit_separator: "::"
+  source_observation_fields: [dataset, sample_id]
+  observation_fields: [dataset, donor_id, sample_id]
+  observation_separator: "::"
+  min_cells_empirical_distribution: 25
+  min_cells_shrinkage_state: 5
+  min_cells_per_donor_lineage: 25
+  cell_cap_per_donor_lineage: null
+  sliced_wasserstein_projections: 128
+  covariance_shrinkage: ledoit_wolf
+
+sampling:
+  dataset_alpha: 0.5
+  mode: hybrid
+  default_lambda: 0.7
+  lineage_lambda: {}
+  sample_with_replacement_across_epochs: true
+
+gene_programs:
+  minimum_mapped_genes: 10
+  maximum_mapped_genes: 200
+  minimum_expression_coverage: 0.001
+  minimum_donor_coverage: 0.05
+  minimum_training_dataset_fraction: 0.75
+  redundancy_jaccard_threshold: 0.8
+  maximum_overlap: 0.9
+  selection_scope: training_datasets_only
 
 healthy_reference:
   age_model: spline
   condition_on_sex: true
-  use_dataset_balancing: true
+  primary_weighting_scheme: donor_pooled
+  reported_weighting_schemes: [donor_pooled, cohort_balanced]
+  age_grid_start: 18
+  age_grid_stop: 100
+  age_grid_step: 1
+  age_support_window_years: 5
+  minimum_supporting_cohorts: 3
+  minimum_supporting_donors: 20
+  minimum_exact_sex_donors: 20
+  query_dataset_offset: forbidden
+  cross_fit_training_donors: true
+
+# Final fine-type/TRIPSO-GP selection is run separately inside each outer LODO
+# fold.  It consumes only reference endpoint cross-fit scores from every listed
+# seed; the held-out cohort is structurally forbidden by the selector.
+tripso_gp_selection:
+  required_seeds: [42, 43, 44]
+  minimum_donors_per_cohort: 20
+  minimum_age_span: 10.0
+  minimum_cohorts: 3
+  minimum_sign_concordance: 0.75
+  maximum_i2: 0.75
+  maximum_fdr: 0.05
+  minimum_absolute_standardized_slope_per_decade: 0.0
+  minimum_seed_retention_fraction: 1.0
+  minimum_seed_sign_concordance: 1.0
+  minimum_state_observation_coverage: 0.0
+  minimum_median_cells: 5.0
+  maximum_absolute_depth_partial_correlation: 0.5
+  maximum_absolute_composition_partial_correlation: 0.5
+  minimum_seed_rank_correlation: null
+  maximum_seed_effect_sd: null
+  minimum_baseline_standardized_improvement: null
+
+uncertainty:
+  development_cell_bootstraps: 100
+  final_cell_bootstraps: 1000
+  reference_bootstraps: 2000
+  final_tail_reference_bootstraps: 5000
+  primary_model_seeds: 3
+  matched_depths: [25, 50, 100, 250, 500, 1000]
 
 validation:
   soundlife_held_out: true
   disease_cohorts_held_out: true
+  donor_grouped_only: true
+  forbid_cell_level_biological_split: true
+  query_minimum_gene_coverage: 0.8
+  query_minimum_gp_coverage: 0.7

@@ -1,0 +1,12 @@
+{
+  "schema_version": "immune-health-outer-query-evaluation-allowlist/v1",
+  "selection_basis": "inner_validation_only",
+  "outer_query_data_consulted_for_selection": false,
+  "selected_training_job_ids": ["<SELECTED_TRAINING_JOB_ID>"],
+  "allowed_parent_training_job_ids": ["<SELECTED_TRAINING_JOB_ID>"],
+  "selection_manifest_sha256": "<SELECTED_TRIPSO_GPS_FILE_SHA256>",
+  "outer_query_evaluation_only": true,
+  "outer_query_results_used_for_selection": false,
+  "query_derived_evidence_used_for_selection": false,
+  "manifest_sha256": "<CANONICAL_SHA256_OF_ALL_PRECEDING_CONTENT>"
+}

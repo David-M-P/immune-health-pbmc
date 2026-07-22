@@ -1,0 +1,127 @@
+schema_version: 1
+generated_from_audit: reports/data_audit/audit_manifest.json
+
+paths:
+  # Resolved relative to this file. Override this root on another filesystem.
+  reference_data_root: ../../../data/intermediate_data
+  output_root: ../../runs
+  merged_lineage_root: ../../../data/intermediate_data/reference_lineages/merged
+  gene_mapping_resource: ../../../data/intermediate_data/var_filtered/var_aidav2_std.csv
+  gene_program_root: ../../../data/intermediate_data/gene_programs/v1
+
+identifiers:
+  donor_field: donor_id
+  biological_unit_fields: [dataset, donor_id]
+  biological_unit_id: "dataset::donor_id"
+  sample_field: sample_id
+  source_observation_fields: [dataset, sample_id]
+  source_observation_id: "dataset::sample_id"
+  # Approved after audit: OneK1K sample_id is a pool shared across donors.
+  observation_fields: [dataset, donor_id, sample_id]
+  observation_id: "dataset::donor_id::sample_id"
+  separator: "::"
+
+metadata_fields:
+  dataset: dataset
+  donor_id: donor_id
+  sample_id: sample_id
+  age: age
+  sex: sex
+  lineage: lineage
+  fine_type: ctype_low
+  fine_type_confidence: ctype_low_conf
+  broad_type: ctype_high
+  broad_type_confidence: ctype_high_conf
+  chemistry: chemistry
+  batch: batch
+  mitochondrial_fraction: pct_mt
+  optional_timepoint: null
+  optional_visit: null
+
+counts:
+  location: X
+  expected_sparse_format: csr
+  semantic_type: raw_integer_like_counts
+  stored_dtype_observed: float64
+  require_nonnegative: true
+  require_integer_like_values: true
+
+genes:
+  identifier_field: unified_ensembl
+  identifier_type: ensembl_gene
+  strip_version_suffix: true
+  approved_symbol_field: unified_gname
+  mapping_resource_version: audit_2026-07-17
+  mapping_resource_sha256: 3a461a6aac7413d12a220594bda27ea506748673400d969a047b10198fdc31ed
+
+annotation:
+  fine_type_field: ctype_low
+  confidence_field: ctype_low_conf
+  minimum_confidence_default: 0.7
+  canonical_fine_type_field: fine_type
+  state_eligibility_field: fine_type_state_eligible
+  balance_eligibility_field: fine_type_balance_eligible
+  ontology: fine_type_ontology.approved.yaml
+  ontology_requires_scientific_approval: false
+  ontology_approval_status: approved
+  ontology_approved_by: David
+  ontology_approved_at: "2026-07-22"
+
+datasets:
+  - name: aidav2
+    role: healthy_reference
+    exclusion_rules: []
+  - name: immuneindonesia
+    role: healthy_reference
+    exclusion_rules:
+      - name: upstream_health_filter
+        status: already_applied_before_merge
+  - name: immunobiologyaging
+    role: healthy_reference
+    exclusion_rules: []
+  - name: onek1k
+    role: healthy_reference
+    sample_semantics: pooled_library_not_donor_observation
+    exclusion_rules: []
+  - name: terekhova
+    role: healthy_reference
+    repeated_observations: true
+    exclusion_rules: []
+
+lineages:
+  B cells:
+    role: primary
+    path: B_cells/merged.h5ad
+  NK_ILC:
+    role: primary
+    path: NK_ILC/merged.h5ad
+  Monocytes:
+    role: primary
+    path: Monocytes/merged.h5ad
+  CD4_like:
+    role: primary
+    path: CD4_like/merged.h5ad
+  CD8_like:
+    role: primary
+    path: CD8_like/merged.h5ad
+  T_others:
+    role: audit_only
+    path: T_others/merged.h5ad
+  DC:
+    role: audit_only
+    path: DC/merged.h5ad
+  pDC:
+    role: audit_only
+    path: pDC/merged.h5ad
+
+queries:
+  soundlife:
+    enabled: false
+    role: longitudinal_query
+    split_root_glob: ../../../data/intermediate_data/lineages/SoundLife_*_standardized
+    requires_explicit_enable: true
+  galsky:
+    enabled: false
+    role: disease_query
+    split_root: ../../../data/intermediate_data/lineages/galsky_std
+    requires_explicit_enable: true
