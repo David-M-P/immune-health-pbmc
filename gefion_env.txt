@@ -1,0 +1,46 @@
+set -euo pipefail
+
+export GEFION_ACCOUNT=cu_0071
+export GEFION_GPU_PARTITION="defq"
+export GEFION_CPU_PARTITION="defq"
+
+export PROJECT_ROOT="/dcai/users/pesdav/cu_0071/immune_health/immune-health-pbmc"
+export WORK_ROOT="/dcai/users/pesdav/cu_0071/immune_health"
+export INCOMING_ROOT="/dcai/users/pesdav/cu_0071/xfer/pesdav/inbox"
+
+export DATA_ROOT="$WORK_ROOT/data/intermediate_data"
+export ENV_ROOT="$WORK_ROOT/envs/immune-health-tripso-v2"
+
+export RUN_ID=20260723_tripso_stage1_v1
+export OUTPUT_ROOT="$WORK_ROOT/outputs/$RUN_ID"
+export REFERENCE_PREP_OUTPUT_ROOT="$OUTPUT_ROOT/reference_prep"
+export MANIFEST_ROOT="$OUTPUT_ROOT/manifests"
+
+export ACTIVATION_SCRIPT="$PROJECT_ROOT/slurm/activate_packed_environment.sh"
+export IMMUNE_HEALTH_ENV_ROOT="$ENV_ROOT"
+export PY="$ENV_ROOT/bin/python"
+
+# CPU preparation. Tokenization itself is configured for four processes.
+export CPU_WORKERS_PER_NODE=4
+export CPU_CPUS_PER_WORKER=4
+export CPU_NODE_MEMORY="400G"
+export CPU_WALLTIME="7-00:00:00"
+export MAX_CONCURRENT_CPU_NODES="1"
+
+# GPU training: always eight independent one-GPU workers per node.
+export GPU_WORKERS_PER_NODE=8
+export CPUS_PER_GPU_WORKER="20"
+export GPU_NODE_MEMORY="400G"
+export SENTINEL_WALLTIME="7-00:00:00"
+export GPU_WALLTIME="7-00:00:00"
+export PROJECTION_WALLTIME="7-00:00:00"
+# Start with one billed node at a time. Increase this only after confirming the
+# cu_0071 QOS/account limit and reviewing the first node's resource audit.
+export MAX_CONCURRENT_GPU_NODES="1"
+
+GPU_OUTER_RESOURCE_ARGS=(--gpus-per-node=8)
+
+# Gefion runs CPU preparation on the same exclusive eight-GPU nodes. The outer
+# allocation reserves the complete node; cpu_nodepack.sbatch then hides CUDA
+# from its four independent CPU workers.
+CPU_OUTER_RESOURCE_ARGS=(--gpus-per-node=8)

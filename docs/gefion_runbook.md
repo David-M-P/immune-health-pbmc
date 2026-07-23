@@ -2,13 +2,40 @@
 
 This is the least-friction route when raw reference preparation, tokenization,
 training, projection, and downstream CPU work all run on Gefion. The Slurm account
-is fixed to `cu_0071`. The remaining site values are intentionally not guessed:
-partition names, storage paths, wall times, CPUs per worker, node memory, and
-maximum concurrent nodes must be filled from Gefion itself.
+is fixed to `cu_0071`. The current deployment values are recorded in
+`gefion_env.txt`; a generic template remains below only for future deployments.
 
 Manifest generators never submit jobs. Every submission below is explicit and
 restartable. GPU work runs eight independent one-GPU rows per billed node; it is
 not an eight-GPU DDP model. CPU work can also be packed into one exclusive node.
+
+## Copy/paste boundary for the current `cu_0071` deployment
+
+Sections 1–3 are development-cluster/SFTP preparation and are retained for
+provenance. They do **not** need to be pasted into a Gefion terminal after the
+repository, environment archive, source-data archive, and checksum files have
+arrived.
+
+For the current deployment, every Gefion-side command needed through the end of
+Stage 1 is in Sections 4–10. The concrete scheduler and path values are stored in
+the repository file `gefion_env.txt`; do not reconstruct that file by copying a
+chat message. Start every new Gefion login with:
+
+```bash
+cd /dcai/users/pesdav/cu_0071/immune_health/immune-health-pbmc
+test -r ./gefion_env.txt
+source ./gefion_env.txt
+```
+
+The runbook's multiline blocks can therefore be copied from the Gefion checkout
+itself (for example with `less docs/gefion_runbook.md`) or viewed in the internal
+GitLab web interface. No command from an external machine or chat is required.
+The exception is site information that only Gefion can report, such as current
+QOS limits; the commands that query it are included below.
+
+`gefion_env.txt` must be committed and pushed with this runbook. If `git status
+--short` shows it as untracked on the development cluster, the Gefion clone will
+not receive it merely because other repository files were synced.
 
 ## Current execution boundary
 
@@ -201,8 +228,9 @@ sftp> put   reference_source_files.sha256
 
 ## 4. One-time Gefion setup
 
-Clone the reviewed commit, then define the run in one shell. Fill every value in
-angle brackets before submitting anything:
+The following generic block documents all supported variables for other Gefion
+deployments. It is a template, not the copy/paste route for the current
+`cu_0071` run:
 
 ```bash
 set -euo pipefail
@@ -246,11 +274,63 @@ export MAX_CONCURRENT_GPU_NODES="<SET_GPU_NODE_CONCURRENCY>"
 # with the site-approved typed GRES form if required.
 GPU_OUTER_RESOURCE_ARGS=(--gpus-per-node=8)
 
-# CPU workers never see CUDA. Leave this empty when a CPU/exclusive-node request
-# is enough. Add the site-required outer node/GPU request only if Gefion requires
-# it to allocate the billed node; do not add per-task GPU binding.
-CPU_OUTER_RESOURCE_ARGS=()
+# The current cu_0071 deployment runs CPU preparation on defq GPU nodes as
+# well. Reserve the complete eight-GPU node at the outer allocation boundary;
+# cpu_nodepack.sbatch hides CUDA from the independent CPU workers.
+CPU_OUTER_RESOURCE_ARGS=(--gpus-per-node=8)
 ```
+
+When the runtime is initially unknown and the QOS accepts it, use
+`7-00:00:00` for `SENTINEL_WALLTIME`. This is a kill ceiling, not a request to
+keep the node for seven days: the allocation ends when the sentinel finishes.
+The reviewed local `gefion_env.txt` uses the same seven-day ceiling for initial
+CPU, training, and projection submissions, and starts both concurrency limits
+at one billed node.
+
+For the current deployment, load and validate the concrete repository file
+instead of using the generic block:
+
+```bash
+cd /dcai/users/pesdav/cu_0071/immune_health/immune-health-pbmc
+source ./gefion_env.txt
+
+test "$GEFION_ACCOUNT" = cu_0071
+test "$GEFION_CPU_PARTITION" = defq
+test "$GEFION_GPU_PARTITION" = defq
+test "$CPU_WALLTIME" = 7-00:00:00
+test "$SENTINEL_WALLTIME" = 7-00:00:00
+test "$GPU_WALLTIME" = 7-00:00:00
+test "$PROJECTION_WALLTIME" = 7-00:00:00
+test "$MAX_CONCURRENT_CPU_NODES" = 1
+test "$MAX_CONCURRENT_GPU_NODES" = 1
+test "${GPU_OUTER_RESOURCE_ARGS[*]}" = "--gpus-per-node=8"
+test "${CPU_OUTER_RESOURCE_ARGS[*]}" = "--gpus-per-node=8"
+
+printf '%s\n' \
+  "PROJECT_ROOT=$PROJECT_ROOT" \
+  "WORK_ROOT=$WORK_ROOT" \
+  "INCOMING_ROOT=$INCOMING_ROOT" \
+  "OUTPUT_ROOT=$OUTPUT_ROOT" \
+  "ENV_ROOT=$ENV_ROOT" \
+  "DATA_ROOT=$DATA_ROOT"
+```
+
+Before unpacking, `$INCOMING_ROOT` must be the directory that directly contains
+the five transferred payload/checksum files. Confirm that entirely on Gefion:
+
+```bash
+ls -lh \
+  "$INCOMING_ROOT/immune-health-tripso-linux-x86_64-v2.tar.gz" \
+  "$INCOMING_ROOT/immune-health-tripso-linux-x86_64-v2.tar.gz.sha256" \
+  "$INCOMING_ROOT/reference_source_data.tar" \
+  "$INCOMING_ROOT/reference_source_data.tar.sha256" \
+  "$INCOMING_ROOT/reference_source_files.sha256"
+```
+
+If these files were placed in a subdirectory such as `immune_health_v2`, change
+only the `INCOMING_ROOT` assignment in the repository's `gefion_env.txt`, commit
+that path as deployment provenance if appropriate, and source it again. Do not
+move or unpack files until all five paths above resolve.
 
 If the checkout does not exist yet, clone the internal GitLab repository and pin
 the reviewed commit before unpacking data:
@@ -679,16 +759,67 @@ export STAGE1_SENTINEL_INDICES='0-5,60-65'
 STAGE1_SENTINEL_JOB=$(submit_gpu_pack \
   "$STAGE1_MANIFEST" "$CPU_BIND_JOB" "$STAGE1_SENTINEL_INDICES" \
   "$SENTINEL_WALLTIME")
+
+printf '%s\n' "sentinel=$STAGE1_SENTINEL_JOB" \
+  | tee "$OUTPUT_ROOT/stage1_sentinel_job_id.txt"
 ```
 
 This uses two node-array elements. Wait for it, inspect all 12 model manifests,
 GPU memory, node memory, runtime, sampler audit, sequence QC, and failure markers.
-Set `GPU_WALLTIME` from the slow tail rather than the mean.
+The current seven-day `GPU_WALLTIME` may be retained; if you choose to shorten
+it later, base that choice on the slow tail rather than the mean.
+
+Monitor and verify the sentinel with commands already available on Gefion:
+
+```bash
+squeue -j "$STAGE1_SENTINEL_JOB" \
+  -o '%.18i %.12P %.24j %.8T %.10M %.10l %.6D %R'
+
+sacct -j "$STAGE1_SENTINEL_JOB" \
+  --units=G \
+  --format=JobID,JobName%30,State,Elapsed,Timelimit,AllocTRES%50,MaxRSS,ExitCode
+
+find "$OUTPUT_ROOT/tripso/stage1" -name model_manifest.json -print | sort
+find "$OUTPUT_ROOT/tripso/stage1" -path '*/checkpoints/last.ckpt' -print | sort
+find "$OUTPUT_ROOT/tripso/stage1" -name .failed.json -print | sort
+find "$OUTPUT_ROOT/slurm_logs/gpu_nodepack" -type f -print | sort
+```
+
+Proceed only when `sacct` shows both sentinel array elements completed
+successfully, exactly 12 sentinel `model_manifest.json` files and 12 matching
+`last.ckpt` files exist, and the worker logs have been reviewed. A seven-day
+value is only the kill ceiling. It may be retained for the remainder; reducing
+it after the sentinel is optional.
+
+If the login shell was closed while the sentinel ran, restore the variables and
+helper functions from Sections 4 and 7, then recover the existing IDs rather
+than resubmitting:
+
+```bash
+cd /dcai/users/pesdav/cu_0071/immune_health/immune-health-pbmc
+source ./gefion_env.txt
+
+export REF_MANIFEST_DIR="$MANIFEST_ROOT/reference_prep"
+export TRAIN_MANIFEST_DIR="$MANIFEST_ROOT/training"
+export PACKED_REF_DIR="$REF_MANIFEST_DIR/packed"
+export STAGE1_MANIFEST="$TRAIN_MANIFEST_DIR/stage1.jsonl"
+export STAGE1_SENTINEL_INDICES='0-5,60-65'
+
+CPU_BIND_JOB=$(
+  sed -n 's/^bind=//p' "$OUTPUT_ROOT/reference_prep_job_ids.txt"
+)
+STAGE1_SENTINEL_JOB=$(
+  sed -n 's/^sentinel=//p' "$OUTPUT_ROOT/stage1_sentinel_job_id.txt"
+)
+test "$CPU_BIND_JOB" -eq "$CPU_BIND_JOB"
+test "$STAGE1_SENTINEL_JOB" -eq "$STAGE1_SENTINEL_JOB"
+```
 
 Then submit only the rows not already used by the sentinel:
 
 ```bash
-export GPU_WALLTIME="<SET_FROM_COMPLETED_SENTINEL>"
+# Keep the seven-day ceiling from gefion_env.txt unless the sentinel provides a
+# well-supported reason to lower it.
 export STAGE1_REMAINDER_INDICES='6-59,66-149'
 
 STAGE1_REMAINDER_JOB=$(submit_gpu_pack \
@@ -704,6 +835,25 @@ printf '%s\n' \
 
 The remainder is 138 independent models in 18 node-array elements. The completed
 Stage 1 should contain 150 `model_manifest.json` files and 150 `last.ckpt` files.
+
+Monitor and verify the complete Stage 1:
+
+```bash
+squeue -j "$STAGE1_SENTINEL_JOB,$STAGE1_REMAINDER_JOB" \
+  -o '%.18i %.12P %.24j %.8T %.10M %.10l %.6D %R'
+
+sacct -j "$STAGE1_SENTINEL_JOB,$STAGE1_REMAINDER_JOB" \
+  --units=G \
+  --format=JobID,JobName%30,State,Elapsed,Timelimit,AllocTRES%50,MaxRSS,ExitCode
+
+test "$(find "$OUTPUT_ROOT/tripso/stage1" -name model_manifest.json | wc -l)" -eq 150
+test "$(find "$OUTPUT_ROOT/tripso/stage1" -path '*/checkpoints/last.ckpt' | wc -l)" -eq 150
+find "$OUTPUT_ROOT/tripso/stage1" -name .failed.json -print | sort
+```
+
+If the final two `test` commands return silently, both expected counts are
+correct. Review every failure marker against the corresponding `.done.json` and
+worker log; a stale failure marker can remain after a successful retry.
 
 ## 10. Bind and project every Stage-1 reference/validation cell
 
