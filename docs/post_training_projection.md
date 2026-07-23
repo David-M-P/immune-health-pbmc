@@ -96,8 +96,11 @@ To reveal the outer cohort, create a reviewed JSON manifest with schema
 `--outer-query-selected-job-allowlist <manifest>`. Either option alone fails.
 
 Run bind arrays after their training array succeeds, then run each projection array
-after its matching bind array succeeds. The same `slurm/tripso_array.sbatch` runner
-can execute them. Each row has two deliberately different locations:
+after its matching bind array succeeds. CPU binding uses
+`slurm/tripso_array.sbatch` on a shared CPU partition or
+`slurm/cpu_nodepack.sbatch` on an exclusive Gefion node; billed Gefion GPU
+projection uses `slurm/tripso_nodepack.sbatch`. All delegate each row to the same
+restart-safe manifest runner. Each row has two deliberately different locations:
 
 - `output_dir`: runner locks, job specification, resource logs, and restart marker;
 - `projection_data_dir`: only the atomically published TRIPSO Arrow output.
@@ -106,23 +109,43 @@ That separation prevents the runner's `job_spec.json` and resource logs from mak
 the vendor projection destination nonempty. Projection writes to a sibling partial
 directory first, so an interrupted attempt does not poison the final data path.
 
-Example submission shape (fill Gefion resources explicitly):
+Bind manifests are CPU work. Use the ordinary single-row array on a shared CPU
+partition, or `slurm/cpu_nodepack.sbatch` when Gefion assigns an exclusive node.
+Projection manifests are GPU work; on Gefion, pack eight independent projection
+rows into each billed exclusive node. Plan the 150-row projection:
+
+```bash
+python slurm/run_manifest_nodepack.py \
+  --manifest slurm/manifests/post_training/stage1/project_reference.jsonl \
+  --workers-per-node 8 \
+  --plan-only
+```
+
+It requires 19 node-array elements. After the matching CPU bind array succeeds,
+submit the GPU projection with explicit Gefion node resources:
 
 ```bash
 sbatch \
-  --account=<GEFION_ACCOUNT> \
+  --account=cu_0071 \
   --partition=<GPU_PARTITION> \
   --time=<WALLTIME> \
-  --gpus=<GPU_REQUEST> \
-  --cpus-per-task=<CPUS> \
-  --mem=<MEMORY> \
-  --array=0-149 \
-  --export=ALL,PROJECT_ROOT=<GEFION_CHECKOUT>,OUTPUT_ROOT=<GEFION_OUTPUT>,TRIPSO_JOB_MANIFEST=<GEFION_CHECKOUT>/slurm/manifests/post_training/stage1/bind_reference.jsonl,ENVIRONMENT_ACTIVATION_SCRIPT=<ACTIVATION_SCRIPT> \
-  slurm/tripso_array.sbatch
+  --nodes=1 \
+  --exclusive \
+  --ntasks-per-node=8 \
+  --gpus-per-node=8 \
+  --cpus-per-task=<CPUS_PER_PROJECTION> \
+  --mem=<MEMORY_PER_NODE> \
+  --dependency=afterok:<REFERENCE_BIND_ARRAY_JOB_ID> \
+  --array=0-18%<MAXIMUM_CONCURRENT_NODES> \
+  --export=ALL,PROJECT_ROOT=<GEFION_CHECKOUT>,OUTPUT_ROOT=<GEFION_OUTPUT>,TRIPSO_JOB_MANIFEST=<GEFION_CHECKOUT>/slurm/manifests/post_training/stage1/project_reference.jsonl,TRIPSO_WORKERS_PER_NODE=8,IMMUNE_HEALTH_ENV_ROOT=<PACKED_ENV_ROOT>,ENVIRONMENT_ACTIVATION_SCRIPT=<ACTIVATION_SCRIPT> \
+  slurm/tripso_nodepack.sbatch
 ```
 
-Change the manifest and array upper bound for each phase. Use Slurm `afterok` so
-projection never races its model-dependent bind step.
+Repeat for validation after its bind array. Change the node-array upper bound for
+smaller selected manifests using `run_manifest_nodepack.py --plan-only`. Full
+Geneformer and exceptionally large all-cell projections may require fewer than
+eight workers after memory calibration; set `TRIPSO_WORKERS_PER_NODE`,
+`--ntasks-per-node`, and the plan's `--workers-per-node` to the same reduced value.
 
 ## One checkpoint by hand
 

@@ -242,8 +242,11 @@ The matching `slurm/reference_prep_array.sbatch` requests the approved local
 account, four-hour wall time, 96 GB, and four CPUs. It deliberately makes no
 partition or GPU request. Cluster paths and environment activation remain
 external settings; export both `REFERENCE_PREP_OUTPUT_ROOT` and `OUTPUT_ROOT` as
-shown in the example config. A future Gefion template must keep its site values
-explicit.
+shown in the example config. On an exclusive Gefion node, use
+`configs/slurm/gefion_cpu.example.yaml` with `slurm/cpu_nodepack.sbatch`; the exact
+account is `cu_0071`, while partition, node memory, CPU workers, wall time, and
+concurrency remain explicit site values. The full submission chain is in
+[`gefion_runbook.md`](gefion_runbook.md).
 
 ## Arrow bridge
 

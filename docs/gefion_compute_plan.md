@@ -1,15 +1,19 @@
 # Gefion 10,000-hour compute plan
 
 Treat the allocation as a capped experimental budget, not a reason to run the full
-factorial. Confirm how Gefion bills a job: the planning quantities below are
-GPU-hours, meaning elapsed hours multiplied by allocated GPUs.
+factorial. Gefion bills the complete exclusive eight-GPU node. One allocated
+node-hour therefore costs eight GPU-hours whether one or all eight devices are
+busy. Production uses the node-pack launcher: eight independent one-GPU models or
+projections per node, not one eight-GPU DDP model.
 
 ## Calibrate before expanding
 
-Use one GPU per independent job. Run full-duration Stage-1 sentinel jobs for two
-biologically different lineages (for example B cells and Monocytes), both feature
-sets, and all three primary samplers. These 12 jobs are useful results, not throwaway
-benchmarks. Record end-to-end time for token loading, Base training, checkpointing,
+Use one GPU per independent model and run eight models concurrently per billed
+node. Run full-duration Stage-1 sentinel jobs for two biologically different
+lineages (for example B cells and Monocytes), both feature sets, and all three
+primary samplers. These 12 jobs are useful results, not throwaway benchmarks, and
+occupy two node allocations (eight plus four active GPUs). Record end-to-end time
+for token loading, Base training, checkpointing,
 and fixed inner-validation projection separately by lineage and HVG size. Keep
 outer-query projection out of calibration. Use the 90th-percentile
 observed runtime for budgeting.
@@ -35,6 +39,11 @@ hashes have been inspected.
 | Optional production seeds | same final model × seeds 4–5 | 10 |
 | Full Geneformer gate | 2 lineages × 2 folds, then at most all 25 | 4 → 25 |
 | Sequential Global gate | 2 lineages × 2 folds, then at most all 25 | 4 → 25 |
+
+At eight workers per node, 150 jobs map to 19 node elements, 100 to 13, the
+15-job final core to two, and 25 jobs to four. A partial final element is still
+billed for all eight GPUs. Never fill a partial element with sealed query work or
+an otherwise scientifically unauthorized job merely to improve utilization.
 
 The 150/100 selection jobs are ranked only on donors held inside the four
 reference cohorts; outer query cohorts remain sealed until the configuration is
@@ -62,6 +71,11 @@ The three-seed core is approximately:
 ```text
 250*b + 15*p + up_to_25*g + up_to_25*q + calibration + C_query
 ```
+
+These are GPU-hours. To estimate exclusive-node wall time for a homogeneous
+eight-way packed phase, divide the fully occupied portion by eight and add complete
+node billing for each partial bundle. The `%` limit in a node-packed Slurm array
+counts concurrent nodes, so `%4` means at most 32 simultaneous model workers.
 
 Reserve at least 15% (about 1,500 hours) for failed/requeued jobs, locked outer-query projection,
 and justified follow-up. As a planning example only, if `b=20`, `p=25`, `g=60`,

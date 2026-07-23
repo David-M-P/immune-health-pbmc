@@ -24,6 +24,36 @@ from typing import Any, Mapping, Sequence
 JOB_ID_RE = re.compile(r"^[A-Za-z0-9_.-]+$")
 
 
+def validate_visible_gpu_expectation() -> dict[str, int] | None:
+    """Fail closed when a launcher promises GPU isolation but does not provide it."""
+
+    configured = os.environ.get("IMMUNE_HEALTH_EXPECT_VISIBLE_GPUS")
+    if configured is None:
+        return None
+    try:
+        expected = int(configured)
+    except ValueError as exc:
+        raise ValueError(
+            "IMMUNE_HEALTH_EXPECT_VISIBLE_GPUS must be a non-negative integer"
+        ) from exc
+    if expected < 0:
+        raise ValueError("IMMUNE_HEALTH_EXPECT_VISIBLE_GPUS cannot be negative")
+    try:
+        import torch
+    except Exception as exc:
+        raise RuntimeError(
+            "PyTorch is required to validate node-pack GPU isolation"
+        ) from exc
+    observed = int(torch.cuda.device_count())
+    if observed != expected:
+        raise RuntimeError(
+            "GPU isolation check failed: node-pack worker expected exactly "
+            f"{expected} visible GPU(s), but PyTorch sees {observed}. Check "
+            "launcher CUDA visibility and Slurm GPU-binding settings."
+        )
+    return {"expected": expected, "observed": observed}
+
+
 def _utc_now() -> str:
     return dt.datetime.now(dt.timezone.utc).isoformat()
 
@@ -289,8 +319,26 @@ def resource_log(phase: str) -> dict[str, Any]:
                 "SLURM_CPUS_PER_TASK",
                 "SLURM_MEM_PER_NODE",
                 "SLURM_GPUS",
+                "SLURM_GPUS_ON_NODE",
+                "SLURM_STEP_ID",
+                "SLURM_STEP_GPUS",
+                "SLURM_PROCID",
+                "SLURM_LOCALID",
             )
         },
+        "nodepack": {
+            name: os.environ.get(name)
+            for name in (
+                "IMMUNE_HEALTH_EXPECT_VISIBLE_GPUS",
+                "IMMUNE_HEALTH_NODEPACK_BLOCK_INDEX",
+                "IMMUNE_HEALTH_NODEPACK_WORKER_RANK",
+                "IMMUNE_HEALTH_NODEPACK_MANIFEST_INDEX",
+                "IMMUNE_HEALTH_NODEPACK_ORIGINAL_SLURM_NTASKS",
+                "IMMUNE_HEALTH_NODEPACK_ORIGINAL_SLURM_PROCID",
+                "IMMUNE_HEALTH_NODEPACK_ORIGINAL_CUDA_VISIBLE_DEVICES",
+            )
+        },
+        "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
         "gpu": _optional_command(
             [
                 "nvidia-smi",
@@ -438,6 +486,14 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = parse_args(argv)
+    gpu_validation = validate_visible_gpu_expectation()
+    if gpu_validation is not None:
+        print(
+            json.dumps(
+                {"gpu_isolation_validation": gpu_validation}, sort_keys=True
+            ),
+            flush=True,
+        )
     job = load_job(args.manifest, args.index)
     return run_job(job, dry_run=args.dry_run)
 

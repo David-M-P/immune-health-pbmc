@@ -67,30 +67,89 @@ The reference-preparation cluster example includes both
 ## Configure cluster resources
 
 Copy the relevant file in `configs/slurm/` outside version control or supply its
-values through your site launcher. Partition, wall time, GPU request, CPU count,
-memory, output root, project root, and environment activation script are intentional
-placeholders. They are not inferred from another cluster.
+values through your site launcher. Partition, wall time, CPU count per worker,
+node memory, output root, project root, and environment activation script are
+intentional placeholders. They are not inferred from another cluster.
 
-The generic array script retains the approved local default
-`#SBATCH --account=immunehealth` and makes no partition, GPU, or wall-time guess.
-On Gefion, use `configs/slurm/gefion_gpu.example.yaml` and override the account at
-submission as well as filling every other placeholder:
+The generic `tripso_array.sbatch` launcher still runs one manifest row per Slurm
+allocation. Do not use it with an exclusive Gefion GPU node: Gefion bills the
+complete eight-GPU node, so that combination would leave seven GPUs idle.
+
+CPU phases on an exclusive Gefion node use `cpu_nodepack.sbatch`. It runs a
+configurable number of independent manifest rows with CPU core binding, explicitly
+hides CUDA, and verifies that each child sees zero GPUs. The same launcher covers
+reference preparation, post-training binding, and downstream CPU manifests. Use
+`scripts/combine_job_manifests.py` to combine independent same-dependency phases
+without losing row provenance. See the
+[`Gefion end-to-end runbook`](gefion_runbook.md) for the exact dependency chain.
+
+Gefion production uses `tripso_nodepack.sbatch`. One node-array element requests
+one exclusive eight-GPU node; one `srun` step launches eight independent tasks,
+each with one GPU and one manifest row. This is not DDP. Before submitting, print
+the exact row-to-node mapping:
+
+```bash
+python slurm/run_manifest_nodepack.py \
+  --manifest slurm/manifests/stage1.jsonl \
+  --workers-per-node 8 \
+  --plan-only
+```
+
+For the 150-row Stage-1 manifest this reports 19 node-array elements and
+`slurm_array_spec=0-18`. Submit it as follows, filling every site placeholder:
 
 ```bash
 sbatch \
-  --account=<GEFION_ACCOUNT> \
-  --partition=<CLUSTER_GPU_PARTITION> \
+  --account=cu_0071 \
+  --partition=<GEFION_GPU_PARTITION> \
   --time=<WALLTIME> \
-  --gpus=<GPU_REQUEST> \
-  --cpus-per-task=<CPUS> \
-  --mem=<MEMORY> \
-  --array=0-149 \
-  --export=ALL,PROJECT_ROOT=<PROJECT_ROOT>,OUTPUT_ROOT=<OUTPUT_ROOT>,TRIPSO_JOB_MANIFEST=<PROJECT_ROOT>/slurm/manifests/stage1.jsonl,ENVIRONMENT_ACTIVATION_SCRIPT=<ACTIVATION_SCRIPT> \
-  slurm/tripso_array.sbatch
+  --nodes=1 \
+  --exclusive \
+  --ntasks-per-node=8 \
+  --gpus-per-node=8 \
+  --cpus-per-task=<CPUS_PER_GPU_WORKER> \
+  --mem=<MEMORY_PER_NODE> \
+  --array=0-18%<MAXIMUM_CONCURRENT_NODES> \
+  --export=ALL,PROJECT_ROOT=<PROJECT_ROOT>,OUTPUT_ROOT=<OUTPUT_ROOT>,TRIPSO_JOB_MANIFEST=<PROJECT_ROOT>/slurm/manifests/stage1.jsonl,TRIPSO_WORKERS_PER_NODE=8,IMMUNE_HEALTH_ENV_ROOT=<PACKED_ENV_ROOT>,ENVIRONMENT_ACTIVATION_SCRIPT=<ACTIVATION_SCRIPT> \
+  slurm/tripso_nodepack.sbatch
 ```
 
+The `%` throttle counts exclusive nodes, not GPUs or models: `%4` permits four
+nodes and therefore at most 32 concurrent one-GPU workers. If Gefion requires a
+typed GRES request, replace `--gpus-per-node=8` with the site-approved
+`--gres=gpu:<TYPE>:8`; the inner step still requires one bound GPU per task.
+
+For a non-contiguous selection, pass the same reviewed selection to planning and
+submission. The 12 B-cell/Monocyte sentinel rows use two nodes:
+
+```bash
+python slurm/run_manifest_nodepack.py \
+  --manifest slurm/manifests/stage1.jsonl \
+  --workers-per-node 8 \
+  --indices '0-5,60-65' \
+  --plan-only
+
+sbatch <THE_SAME_NODE_RESOURCE_OPTIONS> \
+  --array=0-1%<MAXIMUM_CONCURRENT_NODES> \
+  --export=ALL,PROJECT_ROOT=<PROJECT_ROOT>,OUTPUT_ROOT=<OUTPUT_ROOT>,TRIPSO_JOB_MANIFEST=<PROJECT_ROOT>/slurm/manifests/stage1.jsonl,TRIPSO_WORKERS_PER_NODE=8,IMMUNE_HEALTH_ENV_ROOT=<PACKED_ENV_ROOT>,ENVIRONMENT_ACTIVATION_SCRIPT=<ACTIVATION_SCRIPT> \
+  slurm/tripso_nodepack.sbatch --indices '0-5,60-65'
+```
+
+An `--indices-file` containing comma/range tokens or one index per line is also
+supported. Stage-3 core seeds use
+`0-2,5-7,10-12,15-17,20-22`, which maps to two nodes.
+
+The launcher uses `--gpus-per-task=1`, `--gpu-bind=single:1`, and an explicit
+PyTorch check so every worker sees exactly one GPU. It also rewrites the inherited
+eight-task Slurm rank variables before entering Lightning; otherwise Lightning
+could mistake the eight independent models for one DDP job. `--wait=0` allows
+fast/tail ranks to finish without terminating longer peers. If one worker fails,
+the other seven finish, the node element returns non-zero, and a resubmission
+skips valid per-row `.done.json` artifacts.
+
 This example documents submission; it is not executed by manifest generation.
-Create `slurm/logs` before submission (the repository includes it).
+Create `slurm/logs` before submission (the repository includes it). Per-worker
+logs are written under `slurm/logs/nodepack/<array-job>_<block>/`.
 
 ## Post-training all-cell projection
 

@@ -1,16 +1,23 @@
 schema_version: immune-health-slurm/v1
-account: "<SET_GEFION_ACCOUNT>"
+account: cu_0071
 partition: "<SET_GEFION_GPU_PARTITION>"
 time: "<SET_GEFION_WALLTIME>"
-gpus: "<SET_GEFION_GPU_REQUEST>"
-cpus_per_task: "<SET_GEFION_CPUS_PER_TASK>"
-memory: "<SET_GEFION_MEMORY_REQUEST>"
+nodes: 1
+exclusive: true
+ntasks_per_node: 8
+workers_per_node: 8
+gpus_per_node: 8
+gpus_per_worker: 1
+cpus_per_worker: "<SET_GEFION_CPUS_PER_MODEL_OR_PROJECTION>"
+memory_per_node: "<SET_GEFION_NODE_MEMORY_REQUEST>"
+maximum_concurrent_nodes: "<SET_GEFION_NODE_CONCURRENCY>"
 environment_activation_script: "<SET_GEFION_ACTIVATION_SCRIPT>"
 
 environment:
+  IMMUNE_HEALTH_ENV_ROOT: "<SET_GEFION_PACKED_ENVIRONMENT_ROOT>"
   PROJECT_ROOT: "<SET_GEFION_REPOSITORY_CHECKOUT>"
   OUTPUT_ROOT: "<SET_GEFION_OUTPUT_ROOT>"
   TRIPSO_JOB_MANIFEST: "<SET_GEFION_JOB_MANIFEST>"
-  # Required only for the gated full-12-layer Geneformer sensitivity and its
-  # frozen projections; the hybrid static-initialized Base does not read it.
-  TRIPSO_GENEFORMER_ROOT: "<SET_GEFION_GENEFORMER_ASSET_ROOT>"
+  TRIPSO_WORKERS_PER_NODE: 8
+  # Export TRIPSO_GENEFORMER_ROOT separately only for the gated full-12-layer
+  # Geneformer sensitivity. The primary static-initialized Base does not use it.

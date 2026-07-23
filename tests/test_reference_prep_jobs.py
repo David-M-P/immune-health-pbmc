@@ -80,6 +80,27 @@ def test_reference_prep_jobs_materialize_both_exact_hvg_variants() -> None:
         outputs = set(job["expected_outputs"])
         assert any(path.endswith("/model_genes_hvg3000.txt") for path in outputs)
         assert any(path.endswith("/model_genes_hvg9000.txt") for path in outputs)
+        required_feature_sidecars = {
+            "feature_manifest.json",
+            "hvg3000.txt",
+            "hvg9000.txt",
+            "gene_programs_filtered.gmt",
+            "gpdb_filtered.csv",
+            "gene_program_terms.tsv",
+            "cell_metadata.parquet",
+            "training_gene_statistics.parquet",
+            "gene_program_filter_report.parquet",
+            "gene_program_gene_support.parquet",
+            "hvg_scores.parquet",
+            "hvg_dataset_scores.parquet",
+            "model_gene_membership.parquet",
+            "simple_gp_donor_scores.parquet",
+            "simple_gp_age_effects.parquet",
+            "simple_gp_transferability.parquet",
+            "projection_gp_candidates.tsv",
+            "projection_gp_candidates.json",
+        }
+        assert required_feature_sidecars <= {Path(path).name for path in outputs}
 
     lodo_materialize = [
         job for job in jobs["materialize"] if job.get("heldout_dataset") is not None

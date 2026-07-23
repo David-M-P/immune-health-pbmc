@@ -1,0 +1,24 @@
+schema_version: immune-health-slurm/v1
+account: cu_0071
+partition: "<SET_GEFION_CPU_OR_NODE_PARTITION>"
+time: "<SET_GEFION_CPU_WALLTIME>"
+nodes: 1
+exclusive: true
+workers_per_node: "<SET_GEFION_CPU_WORKERS_PER_NODE_AFTER_CALIBRATION>"
+cpus_per_worker: "<SET_GEFION_CPUS_PER_CPU_WORKER>"
+memory_per_node: "<SET_GEFION_NODE_MEMORY_REQUEST>"
+maximum_concurrent_nodes: "<SET_GEFION_NODE_CONCURRENCY>"
+environment_activation_script: "<SET_GEFION_ACTIVATION_SCRIPT>"
+
+# Reference preparation, post-training binding, and downstream phases are
+# CPU-only. The node-pack launcher hides any GPUs that happen to be present on an
+# exclusive Gefion node. Whether the outer allocation must nevertheless request
+# all eight GPUs is a site-policy setting and is not guessed here.
+environment:
+  IMMUNE_HEALTH_ENV_ROOT: "<SET_GEFION_PACKED_ENVIRONMENT_ROOT>"
+  PROJECT_ROOT: "<SET_GEFION_REPOSITORY_CHECKOUT>"
+  DATA_ROOT: "<SET_GEFION_INTERMEDIATE_DATA_ROOT>"
+  REFERENCE_PREP_OUTPUT_ROOT: "<SET_GEFION_REFERENCE_PREP_OUTPUT_ROOT>"
+  OUTPUT_ROOT: "<SET_GEFION_SHARED_OUTPUT_ROOT>"
+  CPU_JOB_MANIFEST: "<SET_GEFION_CPU_JOB_MANIFEST>"
+  CPU_WORKERS_PER_NODE: "<SET_GEFION_CPU_WORKERS_PER_NODE>"

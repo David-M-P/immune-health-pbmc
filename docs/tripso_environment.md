@@ -169,37 +169,72 @@ The primary static-embedding Base does not require this environment variable.
 
 ## Moving to Gefion
 
-Keep code and large immutable assets separate:
+The complete executable sequence is in
+[`gefion_runbook.md`](gefion_runbook.md). Keep code and large immutable assets
+separate:
 
 1. Push the repository (without data, models, or `.conda_isolated`) to GitLab and
-   clone it on Gefion.
-2. Pack the validated environment on this Linux cluster:
+   clone the exact reviewed commit on Gefion.
+2. Build a fresh prefix from `environment.yml`, then pack it without
+   `--ignore-missing-files`, `--ignore-editable-packages`, or `--dest-prefix`:
 
    ```bash
-   conda-pack \
-     --prefix "$PWD/.conda_isolated/immune-health-tripso" \
-     --output immune-health-tripso-linux-x86_64.tar.gz
+   mamba env create --prefix <NEW_PREFIX> --file environment.yml
+   <NEW_PREFIX>/bin/conda-pack \
+     --prefix <NEW_PREFIX> \
+     --output immune-health-tripso-linux-x86_64-v2.tar.gz
    ```
 
-3. Transfer that archive, the exact 3k/9k materialized inputs, manifests, and
-   `external_assets/Geneformer` over SFTP. Do not put these large files in Git.
-   If tokenization was performed locally, transfer the complete Hugging Face
-   directory and sidecars too; use the hash-validating
-   `relocate-tokenization` procedure in
-   [`reference_preparation.md`](reference_preparation.md#relocate-a-tokenization-after-sftp)
-   on Gefion instead of editing absolute paths in JSON.
-4. On Gefion, unpack into a fixed directory and repair prefixes:
+   NumPy, Packaging, and Requests are conda-pinned to the same versions required
+   by TRIPSO. This prevents pip from overwriting newer conda-managed files and
+   producing an invalid mixed tree during packing. Extract the candidate archive
+   to a different temporary prefix, run `conda-unpack`, dependency imports, the
+   environment validator, and the real CPU smoke before upload.
+3. For the all-Gefion route, transfer that validated archive, the five merged
+   lineage H5ADs, and `gene_programs_curated.gmt` over SFTP. Generate the 3k/9k
+   materializations, Arrow datasets, and manifests on Gefion. This avoids
+   tokenization relocation entirely. The external full Geneformer asset is
+   optional and is not needed by the primary Base.
+4. If using an older split-cluster route instead, transfer every materialized
+   input and tokenization sidecar and use the hash-validating
+   [`relocate-tokenization`](reference_preparation.md#relocate-a-tokenization-after-sftp)
+   command. Never edit absolute paths in JSON by hand.
+5. On Gefion, verify the portable checksum, unpack into a new fixed directory,
+   and repair prefixes:
 
    ```bash
-   mkdir -p /path/on/gefion/envs/immune-health-tripso
-   tar -xzf immune-health-tripso-linux-x86_64.tar.gz \
-     -C /path/on/gefion/envs/immune-health-tripso
-   /path/on/gefion/envs/immune-health-tripso/bin/conda-unpack
+   mkdir -p /path/on/gefion/envs/immune-health-tripso-v2
+   tar -xzf immune-health-tripso-linux-x86_64-v2.tar.gz \
+     -C /path/on/gefion/envs/immune-health-tripso-v2
+   /path/on/gefion/envs/immune-health-tripso-v2/bin/python \
+     /path/on/gefion/envs/immune-health-tripso-v2/bin/conda-unpack
    ```
 
-5. Re-run the environment validator and a tiny GPU smoke on a compute node before
+6. Export `IMMUNE_HEALTH_ENV_ROOT` and use
+   `slurm/activate_packed_environment.sh` as `ENVIRONMENT_ACTIVATION_SCRIPT`; the
+   wrapper safely activates the archive under the launchers' `set -u` setting.
+7. Re-run the environment validator and a tiny GPU smoke on a compute node before
    launching an array. A packed environment is portable only across compatible
    Linux/glibc systems; Gefion's NVIDIA driver is deliberately revalidated there.
+
+Because Gefion allocates and bills a complete eight-GPU node, also validate the
+same per-task binding used by production before launching models:
+
+```bash
+srun \
+  --nodes=1 \
+  --ntasks=8 \
+  --gpus-per-task=1 \
+  --gpu-bind=single:1 \
+  --exact \
+  --wait=0 \
+  python -c 'import os, torch; r=os.environ["SLURM_PROCID"]; n=torch.cuda.device_count(); print("rank={} visible={} count={}".format(r, os.environ.get("CUDA_VISIBLE_DEVICES"), n), flush=True); assert n == 1'
+```
+
+The output must contain ranks 0–7 and every rank must report `count=1`. Do not
+manually set `CUDA_VISIBLE_DEVICES`; Slurm owns the binding. Production additionally
+checks the PyTorch-visible device count inside every worker and aborts before
+training if isolation is not exact.
 
 The packed environment contains the project version present when it was built.
 The supplied Slurm launchers prepend `${PROJECT_ROOT}/src` to `PYTHONPATH`, so the

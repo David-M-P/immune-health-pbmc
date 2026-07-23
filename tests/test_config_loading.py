@@ -97,8 +97,35 @@ def test_cluster_placeholders_are_visible_and_gefion_account_is_known() -> None:
     genomedk = load_yaml(REPOSITORY_ROOT / "configs/clusters/genomedk.yaml")
 
     assert gefion["cluster"]["project_account"] == "cu_0071"
+    assert gefion["environment"]["environment_name"] == "immune-health-tripso"
     assert list(iter_placeholders(gefion))
     assert list(iter_placeholders(genomedk))
+
+
+def test_gefion_slurm_examples_use_known_account_and_node_packing() -> None:
+    cpu = load_yaml(REPOSITORY_ROOT / "configs/slurm/gefion_cpu.example.yaml")
+    gpu = load_yaml(REPOSITORY_ROOT / "configs/slurm/gefion_gpu.example.yaml")
+
+    assert cpu["account"] == gpu["account"] == "cu_0071"
+    assert cpu["nodes"] == gpu["nodes"] == 1
+    assert cpu["exclusive"] is gpu["exclusive"] is True
+    assert "CPU_JOB_MANIFEST" in cpu["environment"]
+    assert gpu["workers_per_node"] == 8
+    assert gpu["gpus_per_node"] == 8
+    assert gpu["gpus_per_worker"] == 1
+
+
+def test_pack_sensitive_conda_versions_match_tripso_pins() -> None:
+    environment = load_yaml(REPOSITORY_ROOT / "environment.yml")
+    conda_dependencies = {
+        value for value in environment["dependencies"] if isinstance(value, str)
+    }
+
+    assert {
+        "numpy=1.25.0",
+        "packaging=25.0",
+        "requests=2.32.3",
+    } <= conda_dependencies
 
 
 def test_clusters_resolve_to_the_same_scientific_configuration() -> None:

@@ -13,10 +13,17 @@ paths:
 
 environment:
   activation_command: "<GEFION_ENVIRONMENT_ACTIVATION_COMMAND>"
-  environment_name: immune-health-pbmc
+  environment_name: immune-health-tripso
 
 slurm:
   default_time: "<GEFION_DEFAULT_WALLTIME>"
-  default_memory_gb: "<GEFION_DEFAULT_MEMORY_GB>"
-  default_cpus: "<GEFION_DEFAULT_CPUS>"
-  default_gpus: "<GEFION_DEFAULT_GPUS>"
+  memory_per_node_gb: "<GEFION_MEMORY_PER_NODE_GB>"
+  cpus_per_gpu_worker: "<GEFION_CPUS_PER_GPU_WORKER>"
+  cpus_per_cpu_worker: "<GEFION_CPUS_PER_CPU_WORKER>"
+  cpu_workers_per_node: "<GEFION_CPU_WORKERS_PER_NODE>"
+  nodes: 1
+  exclusive: true
+  gpu_workers_per_node: 8
+  gpus_per_node: 8
+  gpus_per_worker: 1
+  maximum_concurrent_nodes: "<GEFION_MAXIMUM_CONCURRENT_NODES>"

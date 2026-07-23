@@ -149,10 +149,14 @@ python scripts/generate_job_manifests.py \
 This creates 150 rows (five lineages × five held-out datasets × three primary
 samplers × two feature sets × one seed). The feature sets are 3,000 or 9,000
 fold-local HVGs, each unioned with all retained GP genes and retaining every
-eligible cell. Local CPU preparation uses the requested `immunehealth`, four-hour,
-96-GB, four-CPU template. GPU resources remain explicit site settings; the Gefion
-example contains placeholders and the submission command overrides the generic
-array script's local account default.
+eligible cell. The local CPU template retains account `immunehealth`, four hours,
+96 GB, and four CPUs. Gefion uses account `cu_0071`; its unknown site resources
+remain explicit configuration values. Because Gefion bills exclusive eight-GPU
+nodes, CPU phases use `slurm/cpu_nodepack.sbatch` and GPU training/projection use
+`slurm/tripso_nodepack.sbatch`. The latter launches eight independent one-GPU
+manifest rows per node with GPU binding and single-process Lightning isolation.
+The ordinary `tripso_array.sbatch` remains the single-row fallback for clusters
+that schedule and bill individual jobs.
 
 Generate the staged CPU preparation plus the exact all-five-healthy Stage-3 inputs:
 
@@ -170,6 +174,7 @@ queries are mapped to this frozen vocabulary; query expression cannot redefine i
 ## Documentation
 
 See [`docs/pipeline_overview.md`](docs/pipeline_overview.md),
+[`docs/gefion_runbook.md`](docs/gefion_runbook.md),
 [`docs/production_workflow.md`](docs/production_workflow.md),
 [`docs/reference_preparation.md`](docs/reference_preparation.md),
 [`docs/post_training_projection.md`](docs/post_training_projection.md),

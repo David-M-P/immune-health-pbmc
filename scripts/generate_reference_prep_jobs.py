@@ -46,6 +46,48 @@ def _gp_candidate_args(features: Mapping[str, Any]) -> list[str]:
     return values
 
 
+def _feature_expected_outputs(
+    feature_dir: str,
+    *,
+    hvg_sizes: Sequence[int],
+    ontology_candidate_name: str,
+) -> list[str]:
+    """Inventory every scientific file published by feature preparation.
+
+    The manifest runner trusts a completed row only while this full inventory is
+    intact.  In particular, tokenization consumes ``gpdb_filtered.csv`` and the
+    downstream analysis consumes the donor/age support tables, so neither may be
+    omitted from the restart boundary.
+    """
+
+    names = [
+        "feature_manifest.json",
+        *(f"hvg{size}.txt" for size in hvg_sizes),
+        *(f"model_genes_hvg{size}.txt" for size in hvg_sizes),
+        "gene_programs_filtered.gmt",
+        "gpdb_filtered.csv",
+        "gene_program_terms.tsv",
+        "cell_metadata.parquet",
+        "fine_type_mapping_qc.tsv",
+        "training_gene_statistics.parquet",
+        "gene_program_filter_report.parquet",
+        "gene_program_gene_support.parquet",
+        "hvg_scores.parquet",
+        "hvg_dataset_scores.parquet",
+        "model_gene_membership.parquet",
+        "simple_gp_donor_scores.parquet",
+        "simple_gp_age_effects.parquet",
+        "simple_gp_transferability.parquet",
+        "projection_gp_candidates.tsv",
+        "projection_gp_candidates.json",
+        "fine_type_ontology.approved.yaml",
+        ontology_candidate_name,
+    ]
+    if len(names) != len(set(names)):
+        raise ValueError("Feature expected-output names must be unique")
+    return [f"{feature_dir}/{name}" for name in names]
+
+
 def load_config(path: Path) -> dict[str, Any]:
     with Path(path).open(encoding="utf-8") as handle:
         config = yaml.safe_load(handle)
@@ -390,19 +432,11 @@ def generate_jobs(config: Mapping[str, Any]) -> dict[str, list[dict[str, Any]]]:
                         paths["fine_type_ontology"],
                         ontology_candidate,
                     ],
-                    expected_outputs=[
-                        feature_manifest,
-                        *[
-                            f"{feature_dir}/model_genes_hvg{size}.txt"
-                            for size in features["hvg_sizes"]
-                        ],
-                        f"{feature_dir}/gene_programs_filtered.gmt",
-                        f"{feature_dir}/projection_gp_candidates.tsv",
-                        f"{feature_dir}/projection_gp_candidates.json",
-                        f"{feature_dir}/fine_type_mapping_qc.tsv",
-                        f"{feature_dir}/fine_type_ontology.approved.yaml",
-                        f"{feature_dir}/{ontology_candidate_name}",
-                    ],
+                    expected_outputs=_feature_expected_outputs(
+                        feature_dir,
+                        hvg_sizes=features["hvg_sizes"],
+                        ontology_candidate_name=ontology_candidate_name,
+                    ),
                     details={
                         "lineage": lineage_name,
                         "heldout_dataset": heldout,
@@ -670,19 +704,11 @@ def generate_jobs(config: Mapping[str, Any]) -> dict[str, list[dict[str, Any]]]:
                     paths["fine_type_ontology"],
                     ontology_candidate,
                 ],
-                expected_outputs=[
-                    final_feature_manifest,
-                    *[
-                        f"{final_feature_dir}/model_genes_hvg{size}.txt"
-                        for size in features["hvg_sizes"]
-                    ],
-                    f"{final_feature_dir}/gene_programs_filtered.gmt",
-                    f"{final_feature_dir}/projection_gp_candidates.tsv",
-                    f"{final_feature_dir}/projection_gp_candidates.json",
-                    f"{final_feature_dir}/fine_type_mapping_qc.tsv",
-                    f"{final_feature_dir}/fine_type_ontology.approved.yaml",
-                    f"{final_feature_dir}/{ontology_candidate_name}",
-                ],
+                expected_outputs=_feature_expected_outputs(
+                    final_feature_dir,
+                    hvg_sizes=features["hvg_sizes"],
+                    ontology_candidate_name=ontology_candidate_name,
+                ),
                 details={
                     "lineage": lineage_name,
                     "reference_design": "all_healthy",

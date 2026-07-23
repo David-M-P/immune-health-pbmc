@@ -18,6 +18,12 @@ dependencies:
   - pytorch=2.4.1
   - torchvision=0.19.1
   - pytorch-cuda=12.1
+  # Keep conda's package records aligned with TRIPSO's pip pins. Without these,
+  # pip can replace newer solver-selected files in place; conda-pack then either
+  # refuses the altered prefix or reconstructs a mixed, non-importable tree.
+  - numpy=1.25.0
+  - packaging=25.0
+  - requests=2.32.3
   - pip:
       # TRIPSO's reviewed runtime pins.  Do not replace this with the newest
       # Geneformer environment: the primary model uses TRIPSO's May-2025 assets.
