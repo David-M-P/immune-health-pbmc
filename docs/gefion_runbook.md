@@ -23,8 +23,7 @@ chat message. Start every new Gefion login with:
 
 ```bash
 cd /dcai/users/pesdav/cu_0071/immune_health/immune-health-pbmc
-test -r ./gefion_env.txt
-source ./gefion_env.txt
+source ./slurm/load_gefion.sh
 ```
 
 The runbook's multiline blocks can therefore be copied from the Gefion checkout
@@ -228,71 +227,12 @@ sftp> put   reference_source_files.sha256
 
 ## 4. One-time Gefion setup
 
-The following generic block documents all supported variables for other Gefion
-deployments. It is a template, not the copy/paste route for the current
-`cu_0071` run:
-
-```bash
-set -euo pipefail
-
-export GEFION_ACCOUNT=cu_0071
-export GEFION_CPU_PARTITION="<SET_GEFION_CPU_OR_NODE_PARTITION>"
-export GEFION_GPU_PARTITION="<SET_GEFION_GPU_PARTITION>"
-
-export WORK_ROOT="<SET_ABSOLUTE_GEFION_WORK_ROOT>/immune_health"
-export PROJECT_ROOT="$WORK_ROOT/immune-health-pbmc"
-export DATA_ROOT="$WORK_ROOT/data/intermediate_data"
-export ENV_ROOT="$WORK_ROOT/envs/immune-health-tripso-v2"
-export INCOMING_ROOT="<SET_ABSOLUTE_SFTP_INCOMING_ROOT>/immune_health_v2"
-
-export RUN_ID=tripso_production_v1
-export OUTPUT_ROOT="$WORK_ROOT/outputs/$RUN_ID"
-export REFERENCE_PREP_OUTPUT_ROOT="$OUTPUT_ROOT/reference_prep"
-export MANIFEST_ROOT="$OUTPUT_ROOT/manifests"
-export ACTIVATION_SCRIPT="$PROJECT_ROOT/slurm/activate_packed_environment.sh"
-export IMMUNE_HEALTH_ENV_ROOT="$ENV_ROOT"
-export PY="$ENV_ROOT/bin/python"
-
-# CPU node packing. Four workers is a conservative I/O/memory calibration;
-# increase to eight only after checking maximum RSS and storage throughput.
-export CPU_WORKERS_PER_NODE="<SET_4_OR_VALIDATED_8>"
-export CPU_CPUS_PER_WORKER="<SET_CPUS_PER_CPU_WORKER>"
-export CPU_NODE_MEMORY="<SET_CPU_NODE_MEMORY>"
-export CPU_WALLTIME="<SET_CPU_WALLTIME>"
-export MAX_CONCURRENT_CPU_NODES="<SET_CPU_NODE_CONCURRENCY>"
-
-# GPU training/projection always starts with all eight GPUs active.
-export GPU_WORKERS_PER_NODE=8
-export CPUS_PER_GPU_WORKER="<SET_CPUS_PER_GPU_WORKER>"
-export GPU_NODE_MEMORY="<SET_GPU_NODE_MEMORY>"
-export SENTINEL_WALLTIME="<SET_CONSERVATIVE_SENTINEL_WALLTIME>"
-export GPU_WALLTIME="<SET_INITIAL_TRAINING_WALLTIME>"
-export PROJECTION_WALLTIME="<SET_PROJECTION_WALLTIME_AFTER_SMOKE>"
-export MAX_CONCURRENT_GPU_NODES="<SET_GPU_NODE_CONCURRENCY>"
-
-# Use the first form if Gefion accepts the Slurm GPU option shown. Replace it
-# with the site-approved typed GRES form if required.
-GPU_OUTER_RESOURCE_ARGS=(--gpus-per-node=8)
-
-# The current cu_0071 deployment runs CPU preparation on defq GPU nodes as
-# well. Reserve the complete eight-GPU node at the outer allocation boundary;
-# cpu_nodepack.sbatch hides CUDA from the independent CPU workers.
-CPU_OUTER_RESOURCE_ARGS=(--gpus-per-node=8)
-```
-
-When the runtime is initially unknown and the QOS accepts it, use
-`7-00:00:00` for `SENTINEL_WALLTIME`. This is a kill ceiling, not a request to
-keep the node for seven days: the allocation ends when the sentinel finishes.
-The reviewed local `gefion_env.txt` uses the same seven-day ceiling for initial
-CPU, training, and projection submissions, and starts both concurrency limits
-at one billed node.
-
-For the current deployment, load and validate the concrete repository file
-instead of using the generic block:
+Load the concrete deployment file, all derived manifest paths, and the submission
+functions with one command. This opens no editor and submits no jobs:
 
 ```bash
 cd /dcai/users/pesdav/cu_0071/immune_health/immune-health-pbmc
-source ./gefion_env.txt
+source ./slurm/load_gefion.sh
 
 test "$GEFION_ACCOUNT" = cu_0071
 test "$GEFION_CPU_PARTITION" = defq
@@ -314,6 +254,9 @@ printf '%s\n' \
   "ENV_ROOT=$ENV_ROOT" \
   "DATA_ROOT=$DATA_ROOT"
 ```
+
+The seven-day values are kill ceilings: an allocation ends as soon as its work
+finishes. Both concurrency limits initially allow one billed node at a time.
 
 Before unpacking, `$INCOMING_ROOT` must be the directory that directly contains
 the five transferred payload/checksum files. Confirm that entirely on Gefion:
@@ -352,10 +295,11 @@ sacctmgr show associations \
 sinfo -o '%P %a %l %D %c %m %G'
 ```
 
-The versioned cluster template is `configs/clusters/gefion.yaml`. Copy it into the
-run output and fill that copy as provenance; keep the checkout clean. The
-submission helpers below still pass every resource explicitly because the Slurm
-launchers do not load that YAML.
+The versioned `configs/clusters/gefion.yaml` is a portable template and
+intentionally contains placeholders. Do not open or edit it during this run.
+The setup command below writes a separate, placeholder-free runtime-provenance
+file directly from the already loaded values. Submission helpers pass those same
+values explicitly to Slurm.
 
 Verify and unpack the transferred payloads into new destinations:
 
@@ -384,9 +328,36 @@ mkdir -p \
   "$OUTPUT_ROOT/slurm_logs/gpu_nodepack" \
   "$PROJECT_ROOT/slurm/logs"
 
-cp "$PROJECT_ROOT/configs/clusters/gefion.yaml" \
-  "$OUTPUT_ROOT/configs/gefion.resolved.yaml"
-${EDITOR:-vi} "$OUTPUT_ROOT/configs/gefion.resolved.yaml"
+"$PY" scripts/write_gefion_runtime_config.py \
+  --output "$OUTPUT_ROOT/configs/gefion.runtime.yaml" \
+  --project-root "$PROJECT_ROOT" \
+  --work-root "$WORK_ROOT" \
+  --data-root "$DATA_ROOT" \
+  --environment-root "$ENV_ROOT" \
+  --output-root "$OUTPUT_ROOT" \
+  --run-id "$RUN_ID" \
+  --account "$GEFION_ACCOUNT" \
+  --cpu-partition "$GEFION_CPU_PARTITION" \
+  --gpu-partition "$GEFION_GPU_PARTITION" \
+  --activation-script "$ACTIVATION_SCRIPT" \
+  --cpu-walltime "$CPU_WALLTIME" \
+  --gpu-walltime "$GPU_WALLTIME" \
+  --projection-walltime "$PROJECTION_WALLTIME" \
+  --cpu-memory "$CPU_NODE_MEMORY" \
+  --gpu-memory "$GPU_NODE_MEMORY" \
+  --cpu-workers "$CPU_WORKERS_PER_NODE" \
+  --cpu-cpus-per-worker "$CPU_CPUS_PER_WORKER" \
+  --gpu-workers "$GPU_WORKERS_PER_NODE" \
+  --gpu-cpus-per-worker "$CPUS_PER_GPU_WORKER" \
+  --cpu-node-concurrency "$MAX_CONCURRENT_CPU_NODES" \
+  --gpu-node-concurrency "$MAX_CONCURRENT_GPU_NODES" \
+  --gpus-per-node 8
+
+if grep -nE '<[A-Z][A-Z0-9_]*>' \
+  "$OUTPUT_ROOT/configs/gefion.runtime.yaml"; then
+  printf 'Unexpected placeholder in generated runtime configuration\n' >&2
+  exit 1
+fi
 
 export PYTHONPATH="$PROJECT_ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
 "$PY" -c \
@@ -534,11 +505,41 @@ query projection job is generated at this point.
 
 ## 7. Define reusable node-packed submission helpers
 
-Paste these functions into the same Gefion shell after the variables above are
-defined. They calculate the outer node-array range from the manifest, so row
-counts are never confused with node-block counts.
+`slurm/load_gefion.sh` has already loaded the repository implementation. Confirm
+the functions are present:
 
 ```bash
+type plan_array_spec submit_cpu_pack submit_gpu_pack
+```
+
+This command submits no jobs and normally prints only the three `type`
+descriptions. The low-level implementation excerpt below is audit reference;
+do not paste it into the shell. The sourced implementation also provides the
+one-command stage helpers used below. It calculates the outer node-array range
+from the manifest, so row counts are never confused with node-block counts. Its
+`sbatch` parser tolerates informational text that a Gefion wrapper or plugin may
+add around the one numeric `--parsable` record.
+
+```bash
+_gefion_parse_sbatch_job_id() {
+  local raw_output="$1"
+  local line
+  local parsed=""
+
+  while IFS= read -r line; do
+    line="${line%$'\r'}"
+    if [[ "$line" =~ ^([0-9]+)(\;[^[:space:]]+)?$ ]]; then
+      if [[ -n "$parsed" && "$parsed" != "${BASH_REMATCH[1]}" ]]; then
+        return 1
+      fi
+      parsed="${BASH_REMATCH[1]}"
+    fi
+  done <<< "$raw_output"
+
+  [[ -n "$parsed" ]] || return 1
+  printf '%s\n' "$parsed"
+}
+
 plan_array_spec() {
   local manifest="$1"
   local workers="$2"
@@ -600,16 +601,18 @@ submit_cpu_pack() {
   fi
 
   printf 'CPU manifest=%s node_array=%s\n' "$manifest" "$array_spec" >&2
-  local submitted
-  if ! submitted=$(sbatch "${sbatch_args[@]}" "${CPU_OUTER_RESOURCE_ARGS[@]}" \
+  local submission_output
+  if ! submission_output=$(sbatch \
+    "${sbatch_args[@]}" "${CPU_OUTER_RESOURCE_ARGS[@]}" \
     "$PROJECT_ROOT/slurm/cpu_nodepack.sbatch" "${runner_args[@]}"); then
     printf 'CPU sbatch failed for %s\n' "$manifest" >&2
     return 1
   fi
-  submitted="${submitted%%;*}"
-  if [[ ! "$submitted" =~ ^[0-9]+$ ]]; then
-    printf 'CPU sbatch returned an invalid job ID for %s: %q\n' \
-      "$manifest" "$submitted" >&2
+
+  local submitted
+  if ! submitted=$(_gefion_parse_sbatch_job_id "$submission_output"); then
+    printf 'CPU sbatch returned no unique parsable job ID for %s. Raw stdout follows:\n%s\n' \
+      "$manifest" "$submission_output" >&2
     return 1
   fi
   printf '%s\n' "$submitted"
@@ -659,16 +662,18 @@ submit_gpu_pack() {
   fi
 
   printf 'GPU manifest=%s node_array=%s\n' "$manifest" "$array_spec" >&2
-  local submitted
-  if ! submitted=$(sbatch "${sbatch_args[@]}" "${GPU_OUTER_RESOURCE_ARGS[@]}" \
+  local submission_output
+  if ! submission_output=$(sbatch \
+    "${sbatch_args[@]}" "${GPU_OUTER_RESOURCE_ARGS[@]}" \
     "$PROJECT_ROOT/slurm/tripso_nodepack.sbatch" "${runner_args[@]}"); then
     printf 'GPU sbatch failed for %s\n' "$manifest" >&2
     return 1
   fi
-  submitted="${submitted%%;*}"
-  if [[ ! "$submitted" =~ ^[0-9]+$ ]]; then
-    printf 'GPU sbatch returned an invalid job ID for %s: %q\n' \
-      "$manifest" "$submitted" >&2
+
+  local submitted
+  if ! submitted=$(_gefion_parse_sbatch_job_id "$submission_output"); then
+    printf 'GPU sbatch returned no unique parsable job ID for %s. Raw stdout follows:\n%s\n' \
+      "$manifest" "$submission_output" >&2
     return 1
   fi
   printf '%s\n' "$submitted"
@@ -677,6 +682,38 @@ submit_gpu_pack() {
 
 All generic launcher headers retain the local `immunehealth` default. The explicit
 `--account="$GEFION_ACCOUNT"` above overrides it with `cu_0071`.
+
+### If a helper reports an invalid or unparsable job ID
+
+Do not immediately call the helper again. `sbatch` may have accepted the job and
+then printed an informational line that confused an older helper. First inspect
+the scheduler using the commands below; these checks do not submit or cancel
+anything:
+
+```bash
+squeue -u "$USER" \
+  -o '%.18i %.18F %.8K %.30j %.10T %.10M %.10l %R'
+
+sacct -X -S "$(date +%F)" -u "$USER" \
+  --format=JobIDRaw,JobName%30,State,Submit,Start,Elapsed,Timelimit,ExitCode
+```
+
+For an array, `%F` in `squeue` is the numeric array job ID that should be used as
+a dependency (`%A` remains the corresponding filename substitution). If a newly
+submitted `immune-health-cpu-nodepack` or
+`immune-health-tripso-nodepack` is present, recover that ID; do not resubmit the
+same manifest. The job-specific outer logs also contain `%A` in their filename:
+
+```bash
+find "$OUTPUT_ROOT/slurm_logs" -type f -printf '%TY-%Tm-%Td %TH:%TM:%TS %p\n' \
+  | sort -r | head -40
+```
+
+The repository helper now accepts the standard `JOB_ID`, `JOB_ID;CLUSTER`, and
+those records surrounded by nonnumeric informational text. It deliberately
+rejects output containing no numeric parsable record or two different job IDs.
+When reporting a remaining problem, preserve the complete text after `Raw stdout
+follows:` because it determines whether the submission was accepted.
 
 ## 8. Submit all CPU reference preparation
 
@@ -698,28 +735,17 @@ do
 done
 ```
 
-With eight validated CPU workers, the outer arrays are `0-0`, `0-3`, `0-19`,
-`0-19`, and `0-7`. Submit the dependency chain:
+With the current four CPU workers, the outer arrays are `0-0`, `0-7`, `0-39`,
+`0-39`, and `0-14`. Submit the entire dependency chain with one command:
 
 ```bash
-CPU_SETUP_JOB=$(submit_cpu_pack "$PACKED_REF_DIR/setup.jsonl")
-CPU_FEATURES_JOB=$(submit_cpu_pack \
-  "$REF_MANIFEST_DIR/features.jsonl" "$CPU_SETUP_JOB")
-CPU_MATERIALIZE_JOB=$(submit_cpu_pack \
-  "$REF_MANIFEST_DIR/materialize.jsonl" "$CPU_FEATURES_JOB")
-CPU_TOKENIZE_JOB=$(submit_cpu_pack \
-  "$PACKED_REF_DIR/tokenize.jsonl" "$CPU_MATERIALIZE_JOB")
-CPU_BIND_JOB=$(submit_cpu_pack \
-  "$PACKED_REF_DIR/bind.jsonl" "$CPU_TOKENIZE_JOB")
-
-printf '%s\n' \
-  "setup=$CPU_SETUP_JOB" \
-  "features=$CPU_FEATURES_JOB" \
-  "materialize=$CPU_MATERIALIZE_JOB" \
-  "tokenize=$CPU_TOKENIZE_JOB" \
-  "bind=$CPU_BIND_JOB" \
-  | tee "$OUTPUT_ROOT/reference_prep_job_ids.txt"
+gefion_submit_reference_prep
 ```
+
+The helper writes `$OUTPUT_ROOT/reference_prep_job_ids.txt` after each successful
+`sbatch`, so a terminal disconnect cannot lose an already returned job ID. It
+refuses to submit when that state file already exists, preventing accidental
+duplication.
 
 The expected final counts are:
 
@@ -756,12 +782,7 @@ export STAGE1_SENTINEL_INDICES='0-5,60-65'
   --indices "$STAGE1_SENTINEL_INDICES" \
   --plan-only
 
-STAGE1_SENTINEL_JOB=$(submit_gpu_pack \
-  "$STAGE1_MANIFEST" "$CPU_BIND_JOB" "$STAGE1_SENTINEL_INDICES" \
-  "$SENTINEL_WALLTIME")
-
-printf '%s\n' "sentinel=$STAGE1_SENTINEL_JOB" \
-  | tee "$OUTPUT_ROOT/stage1_sentinel_job_id.txt"
+gefion_submit_stage1_sentinel
 ```
 
 This uses two node-array elements. Wait for it, inspect all 12 model manifests,
@@ -797,22 +818,13 @@ than resubmitting:
 
 ```bash
 cd /dcai/users/pesdav/cu_0071/immune_health/immune-health-pbmc
-source ./gefion_env.txt
-
-export REF_MANIFEST_DIR="$MANIFEST_ROOT/reference_prep"
-export TRAIN_MANIFEST_DIR="$MANIFEST_ROOT/training"
-export PACKED_REF_DIR="$REF_MANIFEST_DIR/packed"
-export STAGE1_MANIFEST="$TRAIN_MANIFEST_DIR/stage1.jsonl"
+source ./slurm/load_gefion.sh
 export STAGE1_SENTINEL_INDICES='0-5,60-65'
 
-CPU_BIND_JOB=$(
-  sed -n 's/^bind=//p' "$OUTPUT_ROOT/reference_prep_job_ids.txt"
-)
-STAGE1_SENTINEL_JOB=$(
-  sed -n 's/^sentinel=//p' "$OUTPUT_ROOT/stage1_sentinel_job_id.txt"
-)
-test "$CPU_BIND_JOB" -eq "$CPU_BIND_JOB"
-test "$STAGE1_SENTINEL_JOB" -eq "$STAGE1_SENTINEL_JOB"
+CPU_BIND_JOB=$(_gefion_read_job_id \
+  bind "$OUTPUT_ROOT/reference_prep_job_ids.txt")
+STAGE1_SENTINEL_JOB=$(_gefion_read_job_id \
+  sentinel "$OUTPUT_ROOT/stage1_sentinel_job_id.txt")
 ```
 
 Then submit only the rows not already used by the sentinel:
@@ -822,15 +834,7 @@ Then submit only the rows not already used by the sentinel:
 # well-supported reason to lower it.
 export STAGE1_REMAINDER_INDICES='6-59,66-149'
 
-STAGE1_REMAINDER_JOB=$(submit_gpu_pack \
-  "$STAGE1_MANIFEST" "$CPU_BIND_JOB" "$STAGE1_REMAINDER_INDICES")
-
-export STAGE1_ALL_JOB_IDS="$STAGE1_SENTINEL_JOB:$STAGE1_REMAINDER_JOB"
-
-printf '%s\n' \
-  "sentinel=$STAGE1_SENTINEL_JOB" \
-  "remainder=$STAGE1_REMAINDER_JOB" \
-  > "$OUTPUT_ROOT/stage1_job_ids.txt"
+gefion_submit_stage1_remainder
 ```
 
 The remainder is 138 independent models in 18 node-array elements. The completed
